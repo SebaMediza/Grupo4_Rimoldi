@@ -25,4 +25,16 @@ public class PracticoController {
 
         return "Los " + req.params(":monto") + " dolares son " + (Integer.parseInt(req.params(":monto")) * Integer.parseInt(dolarApi.getCompra())) + " pesos.";
     };
+
+    public Route getHouseOfThrones = (Request req, Response res) -> {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://www.anapioficeandfire.com/api/houses"))
+                .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() != 200) {
+            throw new RuntimeException("Failed to get cotizacion" + response.statusCode());
+        }
+        return response.body();
+    };
+
 }
