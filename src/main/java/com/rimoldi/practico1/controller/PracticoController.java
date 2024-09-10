@@ -23,6 +23,6 @@ public class PracticoController {
         }
         DolarApi dolarApi = gson.fromJson(response.body(), DolarApi.class);
 
-        return (Integer.parseInt(req.params(":monto")) * Integer.parseInt(dolarApi.getCompra()));
+        return "Los " + req.params(":monto") + " dolares son " + (Integer.parseInt(req.params(":monto")) * Integer.parseInt(dolarApi.getCompra())) + " pesos.";
     };
 }
