@@ -7,6 +7,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.URI;
+import com.rimoldi.practico1.model.Juego;
 
 public class PracticoController {
 
@@ -23,6 +24,30 @@ public class PracticoController {
         }
         DolarApi dolarApi = gson.fromJson(response.body(), DolarApi.class);
 
-        return "Los " + req.params(":monto") + " dolares son " + (Integer.parseInt(req.params(":monto")) * Integer.parseInt(dolarApi.getCompra())) + " pesos.";
+        return "Los " + req.params(":monto") + " dolares son "
+                + (Integer.parseInt(req.params(":monto")) * Integer.parseInt(dolarApi.getCompra())) + " pesos.";
+    };
+
+    public Route getGame = (Request req, Response res) -> {
+        HttpResponse<String> response = null;
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("https://steam2.p.rapidapi.com/appDetail/" + req.params(":game")))
+                    .header("x-rapidapi-key", req.headers("x-rapidapi-key"))
+                    .header("x-rapidapi-host", req.headers("x-rapidapi-host"))
+                    .method("GET", HttpRequest.BodyPublishers.noBody())
+                    .build();
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        if (response.statusCode() != 200) {
+            throw new RuntimeException("Failed to get juego" + response.statusCode());
+        }
+
+        Juego juego = gson.fromJson(response.body(), Juego.class);
+        
+        return juego.toString();
     };
 }
