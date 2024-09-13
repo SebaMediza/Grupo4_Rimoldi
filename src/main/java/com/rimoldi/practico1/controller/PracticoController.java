@@ -9,10 +9,10 @@ import java.net.http.HttpResponse;
 import java.net.URI;
 
 public class PracticoController {
-
+    
     private HttpClient client = HttpClient.newHttpClient();
     private Gson gson = new Gson();
-
+    
     public Route getCotizacion = (Request req, Response res) -> {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://dolarapi.com/v1/dolares/oficial"))
@@ -22,7 +22,11 @@ public class PracticoController {
             throw new RuntimeException("Failed to get cotizacion" + response.statusCode());
         }
         DolarApi dolarApi = gson.fromJson(response.body(), DolarApi.class);
-
-        return "Los " + req.params(":monto") + " dolares son " + (Integer.parseInt(req.params(":monto")) * Integer.parseInt(dolarApi.getCompra())) + " pesos.";
+    
+        if (req.queryParams("tipo").equals("dolar")) {
+           return "Los " + req.queryParams("monto") + " dolares son " + (Integer.parseInt(req.queryParams("monto")) * Integer.parseInt(dolarApi.getCompra())) + " pesos.";
+        } else {
+            return "Los " + req.queryParams("monto") + " pesos son " + (Integer.parseInt(req.queryParams("monto")) / Integer.parseInt(dolarApi.getCompra())) + " dolares.";
+        }
     };
 }
