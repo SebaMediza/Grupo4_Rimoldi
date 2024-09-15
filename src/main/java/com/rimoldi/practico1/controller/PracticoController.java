@@ -25,4 +25,11 @@ public class PracticoController {
 
         return "Los " + req.params(":monto") + " dolares son " + (Integer.parseInt(req.params(":monto")) * Integer.parseInt(dolarApi.getCompra())) + " pesos.";
     };
+    public static Route getPar = (Request req, Response res) -> {
+        if (Integer.parseInt(req.params(":numero")) % 2 == 0) {
+            return req.params(":numero") + " es un número par.";
+        } else {
+            return req.params(":numero") + " no es un número par.";
+        }
+    };
 }
