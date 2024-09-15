@@ -25,4 +25,10 @@ public class PracticoController {
 
         return "Los " + req.params(":monto") + " dolares son " + (Integer.parseInt(req.params(":monto")) * Integer.parseInt(dolarApi.getCompra())) + " pesos.";
     };
+    public static Route getHora = (Request req, Response res) -> {
+        int horas = Integer.parseInt(req.params(":segundos")) / 3600;
+        int minutos = (Integer.parseInt(req.params(":segundos")) % 3600) / 60;
+        int segundosRestantes = Integer.parseInt(req.params(":segundos")) % 60;
+        return String.format("%02d:%02d:%02d", horas, minutos, segundosRestantes);
+    };
 }
