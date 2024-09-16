@@ -71,13 +71,15 @@ public class PracticoController {
      
     };
 };
-
-       
-    };
     public static Route getHora = (Request req, Response res) -> {
         int horas = Integer.parseInt(req.params(":segundos")) / 3600;
         int minutos = (Integer.parseInt(req.params(":segundos")) % 3600) / 60;
         int segundosRestantes = Integer.parseInt(req.params(":segundos")) % 60;
         return String.format("%02d:%02d:%02d", horas, minutos, segundosRestantes);
+    };
+    
+    public Route getFahrenheit = (Request req, Response res) -> {
+        return req.params(":celsius") + " equivalen a " + ((Integer.parseInt(req.params(":celsius")) * (9 / 5)) + 32)
+                + " °Fahrenheit.";
     };
 }
