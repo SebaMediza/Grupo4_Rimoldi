@@ -129,4 +129,16 @@ public class PracticoController {
         return req.params(":celsius") + " equivalen a " + ((Integer.parseInt(req.params(":celsius")) * (9 / 5)) + 32)
                 + " °Fahrenheit.";
     };
+
+    public Route getHouseOfThrones = (Request req, Response res) -> {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://www.anapioficeandfire.com/api/houses"))
+                .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() != 200) {
+            throw new RuntimeException("Failed to get cotizacion" + response.statusCode());
+        }
+        return response.body();
+    };
+
 }

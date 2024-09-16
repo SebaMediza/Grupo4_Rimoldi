@@ -8,6 +8,7 @@ public class Main {
         PracticoController PracticoController = new PracticoController();
         PracticoController.addLibros();
         get("/cotizacion/:monto", PracticoController.getCotizacion);
+        get("/houseOfThrones", PracticoController.getHouseOfThrones);
         get("libro", PracticoController.getLibro);
         get("libro/:libro", PracticoController.getLibro);
         get("/esPrimo/:numero", PracticoController.getEsPrimo);
