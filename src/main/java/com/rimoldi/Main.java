@@ -12,7 +12,7 @@ public class Main {
         //Ejercicio 2
         get("/esPrimo/:numero", PracticoController.getEsPrimo);
         //Ejercicio 3
-        get("/esPar/:numero", null);
+        get("/esPar/:numero", PracticoController.getPar);
         //Ejercicio 4
         get("invertir/:cadena", null);
         //Ejercicio 5
