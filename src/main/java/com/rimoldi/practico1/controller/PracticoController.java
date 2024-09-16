@@ -1,28 +1,14 @@
 package com.rimoldi.practico1.controller;
 
+import com.rimoldi.practico1.model.Juego;
+import com.rimoldi.practico1.model.NumeroPrimo;
 import com.rimoldi.practico1.model.DolarApi;
 import com.rimoldi.practico1.model.Libro;
 import spark.*;
 import com.google.gson.Gson;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import java.net.http.*;
 import java.net.URI;
-
-import com.rimoldi.practico1.model.Juego;
-
 import java.util.*;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-
-import com.google.gson.Gson;
-import com.rimoldi.practico1.model.DolarApi;
-import com.rimoldi.practico1.model.NumeroPrimo;
-
-import spark.*;
-
 
 public class PracticoController {
 
@@ -30,6 +16,13 @@ public class PracticoController {
     private Gson gson = new Gson();
     private ArrayList<Libro> libros = new ArrayList<Libro>();
 
+    // Ejericio 1
+    public Route getFahrenheit = (Request req, Response res) -> {
+        return req.params(":celsius") + " equivalen a " + ((Integer.parseInt(req.params(":celsius")) * (9 / 5)) + 32)
+                + " °Fahrenheit.";
+    };
+
+    // Ejercicio 2
     public Route getEsPrimo = (Request request, Response response) -> {
         String nroParam = request.params(":numero");
 
@@ -46,81 +39,28 @@ public class PracticoController {
             return "Error: El parámetro 'numero' debe ser un número.";
         }
     };
+    /*
+     * TODO
+     */
+    // Ejercicio 3
+    /*
+     * TODO
+     */
+    // Ejercicio 4
 
-    public Route getCotizacion = (Request req, Response res) -> {
-        String monto = req.params(":monto");
-        String tipo = req.params(":tipo");
-        int montoInt = Integer.parseInt(monto);
-        double compra;
-        double venta;
-
-        if (montoInt < 0) {
-            return "El monto no puede ser negativo.";
-        }
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://dolarapi.com/v1/dolares/oficial"))
-                .build();
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        if (response.statusCode() != 200) {
-            throw new RuntimeException("Failed to get cotizacion" + response.statusCode());
-        }
-
-        DolarApi dolarApi = gson.fromJson(response.body(), DolarApi.class);
-      
-       try {
-            compra = Double.parseDouble(dolarApi.getCompra());
-            venta = Double.parseDouble(dolarApi.getVenta());
-        } catch (NumberFormatException e) {
-            return "Error al convertir el monto.";
-        }
-
-      if (tipo.equals("dolar")) {
-            return "Los " + monto + " dolares son "
-                    + (montoInt * venta) + " pesos.";
-        } else {
-            return "Los " + monto + " pesos son "
-                    + (montoInt / compra) + " dolares.";
-        }
-     
+    // Ejercicio 5
+    public Route getHora = (Request req, Response res) -> {
+        int horas = Integer.parseInt(req.params(":segundos")) / 3600;
+        int minutos = (Integer.parseInt(req.params(":segundos")) % 3600) / 60;
+        int segundosRestantes = Integer.parseInt(req.params(":segundos")) % 60;
+        return String.format("%02d:%02d:%02d", horas, minutos, segundosRestantes);
     };
+    /*
+     * TODO
+     */
+    // Ejercicio 6
 
-    public Route getGame = (Request req, Response res) -> {
-        HttpResponse<String> response = null;
-        try {
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://steam2.p.rapidapi.com/appDetail/" + req.params(":game")))
-                    .header("x-rapidapi-key", req.headers("x-rapidapi-key"))
-                    .header("x-rapidapi-host", req.headers("x-rapidapi-host"))
-                    .method("GET", HttpRequest.BodyPublishers.noBody())
-                    .build();
-            response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        if (response.statusCode() != 200) {
-            throw new RuntimeException("Failed to get juego" + response.statusCode());
-        }
-
-        Juego juego = gson.fromJson(response.body(), Juego.class);
-        
-        return juego.toString();
-    }
-         
-
-    public Route getLibro = (Request req, Response res) -> {
-        if (req.params(":libro") == null) {
-            return gson.toJson(libros);
-        }
-        for (Libro libro : libros) {
-            if (libro.getTitulo().equals(req.params(":libro"))) {
-                return gson.toJson(libro);
-            }
-        }
-        return "Libro no encontrado";
-    };
-
+    // Ejercicio 7
     public void addLibros() {
         Libro libro1 = new Libro("Cien años de soledad", "Gabriel García Márquez", "978-0307474728", 1967);
         Libro libro2 = new Libro("1984", "George Orwell", "978-0451524935", 1949);
@@ -142,22 +82,82 @@ public class PracticoController {
         libros.add(libro8);
         libros.add(libro9);
         libros.add(libro10);
-    }
-}
-       
-};
-    public static Route getHora = (Request req, Response res) -> {
-        int horas = Integer.parseInt(req.params(":segundos")) / 3600;
-        int minutos = (Integer.parseInt(req.params(":segundos")) % 3600) / 60;
-        int segundosRestantes = Integer.parseInt(req.params(":segundos")) % 60;
-        return String.format("%02d:%02d:%02d", horas, minutos, segundosRestantes);
-    };
-    
-    public Route getFahrenheit = (Request req, Response res) -> {
-        return req.params(":celsius") + " equivalen a " + ((Integer.parseInt(req.params(":celsius")) * (9 / 5)) + 32)
-                + " °Fahrenheit.";
     };
 
+    public Route getLibro = (Request req, Response res) -> {
+        if (req.params(":libro") == null) {
+            return gson.toJson(libros);
+        }
+        for (Libro libro : libros) {
+            if (libro.getTitulo().equals(req.params(":libro"))) {
+                return gson.toJson(libro);
+            }
+        }
+        return "Libro no encontrado";
+    };
+
+    // Ejercicio 8
+    public Route getCotizacion = (Request req, Response res) -> {
+        String monto = req.params(":monto");
+        String tipo = req.params(":tipo");
+        int montoInt = Integer.parseInt(monto);
+        double compra;
+        double venta;
+
+        if (montoInt < 0) {
+            return "El monto no puede ser negativo.";
+        }
+
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("https://dolarapi.com/v1/dolares/oficial"))
+                .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() != 200) {
+            throw new RuntimeException("Failed to get cotizacion" + response.statusCode());
+        }
+
+        DolarApi dolarApi = gson.fromJson(response.body(), DolarApi.class);
+
+        try {
+            compra = Double.parseDouble(dolarApi.getCompra());
+            venta = Double.parseDouble(dolarApi.getVenta());
+        } catch (NumberFormatException e) {
+            return "Error al convertir el monto.";
+        }
+
+        if (tipo.equals("dolar")) {
+            return "Los " + monto + " dolares son "
+                    + (montoInt * venta) + " pesos.";
+        } else {
+            return "Los " + monto + " pesos son "
+                    + (montoInt / compra) + " dolares.";
+        }
+
+    };
+
+    // Ejercicio 9
+    public Route getGame = (Request req, Response res) -> {
+        HttpResponse<String> response = null;
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("https://steam2.p.rapidapi.com/appDetail/" + req.params(":game")))
+                    .header("x-rapidapi-key", req.headers("x-rapidapi-key"))
+                    .header("x-rapidapi-host", req.headers("x-rapidapi-host"))
+                    .method("GET", HttpRequest.BodyPublishers.noBody()).build();
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        if (response.statusCode() != 200) {
+            throw new RuntimeException("Failed to get juego");
+        }
+
+        Juego juego = gson.fromJson(response.body(), Juego.class);
+
+        return juego.toString();
+    };
+
+    // Ejercicio 10
     public Route getHouseOfThrones = (Request req, Response res) -> {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://www.anapioficeandfire.com/api/houses"))
@@ -168,5 +168,4 @@ public class PracticoController {
         }
         return response.body();
     };
-
-}
+};
