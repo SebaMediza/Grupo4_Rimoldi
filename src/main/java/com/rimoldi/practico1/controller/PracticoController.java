@@ -1,6 +1,8 @@
 package com.rimoldi.practico1.controller;
 
 import com.rimoldi.practico1.model.DolarApi;
+import com.rimoldi.practico1.model.Invert;
+
 import spark.*;
 import com.google.gson.Gson;
 import java.net.http.HttpClient;
@@ -24,5 +26,17 @@ public class PracticoController {
         DolarApi dolarApi = gson.fromJson(response.body(), DolarApi.class);
 
         return "Los " + req.params(":monto") + " dolares son " + (Integer.parseInt(req.params(":monto")) * Integer.parseInt(dolarApi.getCompra())) + " pesos.";
+    };
+
+    public Route invertirCadena = (Request req, Response res) -> {
+        String cadenaParam = req.params(":cadena");
+
+        try {
+            String cadena = Invert.invertirCadena(cadenaParam);
+            return cadena;
+        } catch (NumberFormatException e) {
+            res.status(400);
+            return "Error";
+        }
     };
 }
