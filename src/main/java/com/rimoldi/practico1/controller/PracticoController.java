@@ -1,17 +1,37 @@
 package com.rimoldi.practico1.controller;
 
-import com.rimoldi.practico1.model.DolarApi;
-import spark.*;
-import com.google.gson.Gson;
+import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.net.URI;
+
+import com.google.gson.Gson;
+import com.rimoldi.practico1.model.DolarApi;
+import com.rimoldi.practico1.model.NumeroPrimo;
+
+import spark.*;
 
 public class PracticoController {
 
     private HttpClient client = HttpClient.newHttpClient();
     private Gson gson = new Gson();
+
+    public Route getEsPrimo = (Request request, Response response) -> {
+        String nroParam = request.params(":numero");
+
+        try {
+            int numero = Integer.parseInt(nroParam);
+            boolean primo = NumeroPrimo.esPrimo(numero);
+
+            if (primo == true) {
+                return "El número " + numero + " es primo.";
+            }
+            return "El número " + numero + " NO es primo.";
+        } catch (NumberFormatException e) {
+            response.status(400);
+            return "Error: El parámetro 'numero' debe ser un número.";
+        }
+    };
 
     public Route getCotizacion = (Request req, Response res) -> {
         String monto = req.params(":monto");
@@ -33,7 +53,8 @@ public class PracticoController {
         }
 
         DolarApi dolarApi = gson.fromJson(response.body(), DolarApi.class);
-        try {
+      
+       try {
             compra = Double.parseDouble(dolarApi.getCompra());
             venta = Double.parseDouble(dolarApi.getVenta());
         } catch (NumberFormatException e) {
@@ -47,6 +68,11 @@ public class PracticoController {
             return "Los " + monto + " pesos son "
                     + (montoInt / compra) + " dolares.";
         }
+     
+    };
+};
+
+       
     };
     public static Route getHora = (Request req, Response res) -> {
         int horas = Integer.parseInt(req.params(":segundos")) / 3600;
