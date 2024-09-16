@@ -3,6 +3,16 @@ package com.rimoldi.practico1.controller;
 import com.rimoldi.practico1.model.Juego;
 import com.rimoldi.practico1.model.NumeroPrimo;
 import com.rimoldi.practico1.model.DolarApi;
+import com.rimoldi.practico1.model.Usuario;
+import com.rimoldi.practico1.model.UsuarioABM;
+
+import spark.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import com.rimoldi.practico1.model.Invert;
 import com.rimoldi.practico1.model.Libro;
 import spark.*;
@@ -40,9 +50,7 @@ public class PracticoController {
             return "Error: El parámetro 'numero' debe ser un número.";
         }
     };
-    /*
-     * TODO
-     */
+  
     // Ejercicio 3
     public Route getPar = (Request req, Response res) -> {
         if (Integer.parseInt(req.params(":numero")) % 2 == 0) {
@@ -51,9 +59,7 @@ public class PracticoController {
             return req.params(":numero") + " no es un número par.";
         }
     };
-    /*
-     * TODO
-     */
+
     // Ejercicio 4
    public Route invertirCadena = (Request req, Response res) -> {
         String cadenaParam = req.params(":cadena");
@@ -74,10 +80,48 @@ public class PracticoController {
         int segundosRestantes = Integer.parseInt(req.params(":segundos")) % 60;
         return String.format("%02d:%02d:%02d", horas, minutos, segundosRestantes);
     };
-    /*
-     * TODO
-     */
+
     // Ejercicio 6
+      public Route getUsuarios=(Request req, Response res) -> {
+        res.type("application/json");
+        return gson.toJson(UsuarioABM.getUsuarios());
+    };
+
+    public Route altaUsuario=(Request req, Response res) -> {
+        JsonObject json = gson.fromJson(req.body(), JsonObject.class);
+        String nombre = json.get("nombre").getAsString();
+        String email = json.get("email").getAsString();
+        Usuario usuario = UsuarioABM.crearUsuario(nombre, email);
+        res.status(201);
+        return gson.toJson(usuario);
+    };
+
+    public Route eliminarUsuario=(Request req, Response res) -> {
+        int id = Integer.parseInt(req.params(":id"));
+        Usuario usuario = UsuarioABM.eliminarUsuario(id);
+        if (usuario != null) {
+            res.status(200);
+            return gson.toJson(usuario);
+        } else {
+            res.status(404);
+            return "{\"error\": \"Usuario no encontrado.\"}";
+        }
+    };
+
+    public Route modificarUsuario=(Request req, Response res) -> {
+        int id = Integer.parseInt(req.params(":id"));
+        JsonObject json = gson.fromJson(req.body(), JsonObject.class);
+        String nombre = json.get("nombre").getAsString();
+        String email = json.get("email").getAsString();
+        Usuario usuario = UsuarioABM.modificarUsuario(id, nombre, email);
+        if (usuario != null) {
+            res.status(200);
+            return gson.toJson(usuario);
+        } else {
+            res.status(404);
+            return "{\"error\": \"Usuario no encontrado.\"}";
+        }
+    };
 
     // Ejercicio 7
     public void addLibros() {

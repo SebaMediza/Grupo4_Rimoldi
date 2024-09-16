@@ -18,10 +18,10 @@ public class Main {
         //Ejercicio 5
         get("/hora/:segundos", PracticoController.getHora);
         //Ejercicio 6
-        get("/persona", null);
-        post("/persona", null);
-        put("/persona", null);
-        delete("/persona", null);
+        get("/usuarios", PracticoController.getUsuarios);
+        post("/usuarios", PracticoController.altaUsuario);
+        delete("/usuarios/:id", PracticoController.eliminarUsuario);
+        put("/usuarios/:id", PracticoController.modificarUsuario);
         //Ejercicio 7
         get("libro", PracticoController.getLibro);
         get("libro/:libro", PracticoController.getLibro);
