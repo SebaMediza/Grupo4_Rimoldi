@@ -14,7 +14,7 @@ public class Main {
         //Ejercicio 3
         get("/esPar/:numero", PracticoController.getPar);
         //Ejercicio 4
-        get("invertir/:cadena", null);
+        get("/invertir/:cadena", PracticoController.invertirCadena);
         //Ejercicio 5
         get("/hora/:segundos", PracticoController.getHora);
         //Ejercicio 6

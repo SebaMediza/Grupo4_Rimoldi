@@ -3,6 +3,7 @@ package com.rimoldi.practico1.controller;
 import com.rimoldi.practico1.model.Juego;
 import com.rimoldi.practico1.model.NumeroPrimo;
 import com.rimoldi.practico1.model.DolarApi;
+import com.rimoldi.practico1.model.Invert;
 import com.rimoldi.practico1.model.Libro;
 import spark.*;
 import com.google.gson.Gson;
@@ -54,6 +55,17 @@ public class PracticoController {
      * TODO
      */
     // Ejercicio 4
+   public Route invertirCadena = (Request req, Response res) -> {
+        String cadenaParam = req.params(":cadena");
+
+        try {
+            String cadena = Invert.invertirCadena(cadenaParam);
+            return cadena;
+        } catch (NumberFormatException e) {
+            res.status(400);
+            return "Error";
+        }
+    };
 
     // Ejercicio 5
     public Route getHora = (Request req, Response res) -> {
