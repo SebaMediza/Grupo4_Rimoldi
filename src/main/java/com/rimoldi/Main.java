@@ -7,6 +7,8 @@ public class Main {
     public static void main(String[] args) {
         PracticoController PracticoController = new PracticoController();
         get("/esPrimo/:numero", PracticoController.getEsPrimo);
-        get("/cotizacion", PracticoController.getCotizacion);
+        get("/convertir/:monto/tipo/:tipo", PracticoController.getCotizacion);
+        get("/cotizacion/:monto", PracticoController.getCotizacion);
+        get("/hora/:segundos", PracticoController.getHora);
     }
 }
