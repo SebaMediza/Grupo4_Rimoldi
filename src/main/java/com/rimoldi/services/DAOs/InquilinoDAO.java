@@ -1,8 +1,7 @@
 package com.rimoldi.services.DAOs;
 
-import com.rimoldi.model.Inquilino;
+import com.rimoldi.practico2.model.Inquilino;
 import com.rimoldi.services.db.MySQLDAO;
-
 import java.util.List;
 
 import org.sql2o.Connection;
@@ -43,7 +42,24 @@ public class InquilinoDAO implements InterfaceInquilinoDAO {
         }
     }
 
-    public boolean updateInquilino(int dni, Inquilino inquilinoParam) {
+    public boolean updateInquilino(int dni, Inquilino inquilino) {
+        try (Connection con = MySQLDAO.getCon().open()) {
+            String query = "UPDATE inquilino SET nombre = :nombre, direccion = :direccion, fecha_nacimiento = :fecha_nacimiento, telefono = :telefono, email = :email, ocupacion = :ocupacion, ultimo_sueldo = :ultimo_sueldo, fecha_recibo = :fecha_recibo WHERE dni = :dni";
+            con.createQuery(query)
+                    .addParameter("nombre", inquilino.getNombre())
+                    .addParameter("direccion", inquilino.getDireccion())
+                    .addParameter("fecha_nacimiento", inquilino.getFecha_nacimiento())
+                    .addParameter("telefono", inquilino.getTelefono())
+                    .addParameter("email", inquilino.getEmail())
+                    .addParameter("ocupacion", inquilino.getOcupacion())
+                    .addParameter("ultimo_sueldo", inquilino.getUltimo_sueldo())
+                    .addParameter("fecha_recibo", inquilino.getFecha_recibo())
+                    .addParameter("dni", inquilino.getDni())
+                    .executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return false;
+        }
         return false;
     }
 

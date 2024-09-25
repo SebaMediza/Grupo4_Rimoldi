@@ -1,6 +1,6 @@
 package com.rimoldi.services.DAOs;
 
-import com.rimoldi.model.Inquilino;
+import com.rimoldi.practico2.model.Inquilino;
 import java.util.List;
 
 public interface InterfaceInquilinoDAO {

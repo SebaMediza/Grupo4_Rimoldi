@@ -1,11 +1,11 @@
-package com.rimoldi.model;
+package com.rimoldi.practico2.model;
 
 import lombok.Data;
 
 @Data
 public class Inquilino {
     private int id;
-    private String dni;
+    private int dni;
     private String nombre;
     private String direccion;
     private String fecha_nacimiento;
@@ -17,7 +17,7 @@ public class Inquilino {
 
     public Inquilino() {}
 
-    public Inquilino(String dni, String nombre, String direccion, String fecha_nacimiento, String telefono, String email, String ocupacion, float ultimo_sueldo, String fecha_recibo) {
+    public Inquilino(int dni, String nombre, String direccion, String fecha_nacimiento, String telefono, String email, String ocupacion, float ultimo_sueldo, String fecha_recibo) {
         this.dni = dni;
         this.nombre = nombre;
         this.direccion = direccion;

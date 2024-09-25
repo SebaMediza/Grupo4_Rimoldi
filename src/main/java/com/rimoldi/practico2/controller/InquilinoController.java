@@ -1,9 +1,9 @@
-package com.rimoldi.controller;
+package com.rimoldi.practico2.controller;
 
 import java.util.List;
 
 import com.google.gson.Gson;
-import com.rimoldi.model.Inquilino;
+import com.rimoldi.practico2.model.Inquilino;
 import com.rimoldi.services.DAOs.InquilinoDAO;
 
 import spark.Route;
@@ -16,7 +16,7 @@ public class InquilinoController {
     public Route postInquilino = (req, res) -> {
         try {
             Inquilino inquilino = new Inquilino(
-                    req.queryParams("dni"),
+                    Integer.parseInt(req.queryParams("dni")),
                     req.queryParams("nombre"),
                     req.queryParams("direccion"),
                     req.queryParams("fecha_nacimiento"),
@@ -66,6 +66,28 @@ public class InquilinoController {
     };
 
     public Route updateInquilino = (req, res) -> {
-        return null;
+        int dni = Integer.parseInt(req.queryParams("dni"));
+        String nombre = req.queryParams("nombre");
+        String direccio = req.queryParams("direccion");
+        String fecha_nac = req.queryParams("fecha_nacimiento");
+        String tel = req.queryParams("telefono");
+        String mail = req.queryParams("email");
+        String trabajo = req.queryParams("ocupacion");
+        float sueldo = Float.parseFloat(req.queryParams("ultimo_sueldo"));;
+        String recibo = req.queryParams("fecha_recibo");
+        Inquilino inquilino = new Inquilino(dni, nombre, direccio, fecha_nac, tel, mail, trabajo, sueldo, recibo);
+        try {
+            if (inquilinoDAO.updateInquilino(dni, inquilino)) {
+                res.type("application/json");
+                res.status(200);
+                return "Inquilino actualizado";
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            res.status(500);
+            return "Error al actualizar inquilino";
+        }
     };
 }

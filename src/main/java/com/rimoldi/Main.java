@@ -2,8 +2,8 @@ package com.rimoldi;
 
 import static spark.Spark.*;
 
-import com.rimoldi.controller.InquilinoController;
 import com.rimoldi.practico1.controller.PracticoController;
+import com.rimoldi.practico2.controller.InquilinoController;
 
 public class Main {
     public static void main(String[] args) {
