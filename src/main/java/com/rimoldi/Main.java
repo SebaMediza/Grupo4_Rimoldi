@@ -1,11 +1,14 @@
 package com.rimoldi;
 
 import static spark.Spark.*;
+
+import com.rimoldi.controller.InquilinoController;
 import com.rimoldi.practico1.controller.PracticoController;
 
 public class Main {
     public static void main(String[] args) {
         PracticoController PracticoController = new PracticoController();
+        InquilinoController inquilinoController = new InquilinoController();
         PracticoController.addLibros();
         //Ejercicio 1
         get("/celsiusAfahrenheit/:celsius", PracticoController.getFahrenheit);
@@ -31,5 +34,11 @@ public class Main {
         get("/juego/:game", PracticoController.getGame);
         //Ejercicio 10
         get("/houseOfThrones", PracticoController.getHouseOfThrones);
+
+        //TP2
+        get("/inquilino", inquilinoController.getInquilino);
+        post("/inquilino", inquilinoController.postInquilino);
+        delete("/inquilino", inquilinoController.deleteInquilino);
+        put("/inquilino", inquilinoController.updateInquilino);
     }
 }
