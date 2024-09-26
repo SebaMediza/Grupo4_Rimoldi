@@ -54,7 +54,7 @@ public class InquilinoDAO implements InterfaceInquilinoDAO {
                     .addParameter("ocupacion", inquilino.getOcupacion())
                     .addParameter("ultimo_sueldo", inquilino.getUltimo_sueldo())
                     .addParameter("fecha_recibo", inquilino.getFecha_recibo())
-                    .addParameter("dni", inquilino.getDni())
+                    .addParameter("dni", "%" + inquilino.getDni() + "%")
                     .executeUpdate();
         } catch (Exception e) {
             System.out.println(e.toString());
