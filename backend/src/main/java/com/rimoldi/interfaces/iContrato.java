@@ -1,8 +1,10 @@
 package com.rimoldi.interfaces;
 
-import com.rimoldi.models.contrato.Estado;
+import com.rimoldi.models.contrato.Contrato;
 
 public interface iContrato {
-    public boolean crearContrato();
-    public Estado getEstadoContrato();
+    public boolean getContrato();
+    public boolean postContrato(Contrato contrato);
+    public boolean putContrato();
+    public boolean deleteContrato();
 }

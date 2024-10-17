@@ -1,7 +1,9 @@
 package com.rimoldi;
+import com.rimoldi.controllers.ContratoController;
+import static spark.Spark.*;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+       post("/contrato", ContratoController.postContrato);
     }
 }
