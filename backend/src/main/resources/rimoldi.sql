@@ -26,12 +26,12 @@ DROP TABLE IF EXISTS `rimoldi`.`Persona` ;
 CREATE TABLE IF NOT EXISTS `rimoldi`.`Persona` (
   `id` INT NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
-  `dni` INT NOT NULL,
+  `dni` BIGINT NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `celular` INT NOT NULL,
+  `celular` BIGINT NOT NULL,
   `fecha_nac` DATE NOT NULL,
   `username` VARCHAR(45) NOT NULL,
-  `cuil` INT NOT NULL,
+  `cuil` BIGINT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   UNIQUE INDEX `dni_UNIQUE` (`dni` ASC) VISIBLE)
