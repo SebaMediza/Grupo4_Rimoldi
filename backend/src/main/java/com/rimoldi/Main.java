@@ -1,5 +1,7 @@
 package com.rimoldi;
 import com.rimoldi.controllers.ContratoController;
+
+
 import static spark.Spark.*;
 
 public class Main {
