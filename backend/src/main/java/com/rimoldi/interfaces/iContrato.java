@@ -4,7 +4,9 @@ import com.rimoldi.models.contrato.Contrato;
 
 public interface iContrato {
     public boolean getContrato();
-    public boolean postContrato(Contrato contrato);
+    public static boolean postContrato(Contrato contrato){
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     public boolean putContrato();
     public boolean deleteContrato();
 }

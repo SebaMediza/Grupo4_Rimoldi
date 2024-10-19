@@ -1,15 +1,15 @@
 package com.rimoldi;
 
-import com.rimoldi.controllers.ContratoController;
-
 import static spark.Spark.*;
-import org.slf4j.*;
+import com.rimoldi.controllers.ContratoController;
+import com.rimoldi.controllers.EstadoContratoController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Main {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
-
+    public static final Logger logger = LoggerFactory.getLogger(Main.class);
     public static void main(String[] args) {
-        LOGGER.info("Starting server");
         post("/contrato", ContratoController.postContrato);
+        get("/contrato/:nro_contrato", EstadoContratoController.getEstadoContrato);
     }
 }

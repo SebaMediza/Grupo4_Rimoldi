@@ -2,6 +2,7 @@ package com.rimoldi.services;
 
 import org.sql2o.Connection;
 
+import com.rimoldi.Main;
 import com.rimoldi.interfaces.iContrato;
 import com.rimoldi.models.contrato.Contrato;
 import java.text.SimpleDateFormat;
@@ -14,8 +15,7 @@ public class ContratoDAO implements iContrato {
         throw new UnsupportedOperationException("Unimplemented method 'getContrato'");
     }
 
-    @Override
-    public boolean postContrato(Contrato contrato) {
+    public static boolean postContrato(Contrato contrato) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try (Connection conn = SqL2ODAO.getCon().open()) {
             conn.createQuery(
@@ -29,7 +29,7 @@ public class ContratoDAO implements iContrato {
                     .addParameter("idMartillero", contrato.getIdMartillero())
                     .executeUpdate();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            Main.logger.error("Error al crear el contrato: " + e.getMessage());
             return false;
         }
         return true;
