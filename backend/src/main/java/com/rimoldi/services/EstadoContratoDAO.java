@@ -5,7 +5,7 @@ import org.sql2o.Connection;
 import com.rimoldi.interfaces.iEstadoContrato;
 
 public class EstadoContratoDAO implements iEstadoContrato {
-    public boolean getEstadoContrato(int nro_contrato)  {
+    public static boolean getEstadoContrato(int nro_contrato)  {
         try (Connection conn = SqL2ODAO.getCon().open()) {
             conn.createQuery("select c.nro_contrato, e.estado, p.* from estado e inner join estadocontrato ec on e.idestado = ec.idestado inner join contrato c on ec.nro_contrato = c.nro_contrato inner join inquilino i on c.idPersona = i.idPersona inner join persona p on i.idpersona = p.id where c.nro_contrato = :nro_contrato;")
                 .addParameter("nro_contrato", nro_contrato)
