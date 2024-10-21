@@ -153,7 +153,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `rimoldi`.`Contrato` ;
 
 CREATE TABLE IF NOT EXISTS `rimoldi`.`Contrato` (
-  `nro_contrato` INT NOT NULL,
+  `nro_contrato` INT NOT NULL AUTO_INCREMENT,
   `fecha_inicio` DATE NOT NULL,
   `fecha_fin` DATE NOT NULL,
   `fecha_cancelacion` DATE NULL,
