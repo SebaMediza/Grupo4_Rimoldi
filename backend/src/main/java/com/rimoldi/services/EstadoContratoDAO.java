@@ -18,10 +18,10 @@ public class EstadoContratoDAO implements iEstadoContrato {
         }
     }
 
-    public static boolean postEstadoContrato(int idContrato) {
+    public static boolean postEstadoContrato(int nro_contrato) {
         try (Connection conn = SqL2ODAO.getCon().open()){
             conn.createQuery("INSERT INTO estadocontrato (nro_contrato, idEstado) VALUES (:nro_contrato, :idEstado)")
-                .addParameter("nro_contrato", idContrato)
+                .addParameter("nro_contrato", nro_contrato)
                 .addParameter("idEstado", 1)
                 .executeUpdate();
             return true;

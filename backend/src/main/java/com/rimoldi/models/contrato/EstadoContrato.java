@@ -15,10 +15,6 @@ public class EstadoContrato {
     private long cuil;
     private String estado;
 
-   /*  public EstadoContrato(int idContrato, String idEstado) {
-        this.idContrato = idContrato;
-        this.idEstado = idEstado;
-    } */
     public EstadoContrato(){}
     public EstadoContrato(int idEstado, int nro_contrato, String nombre, long dni, String email, long celular, long cuil, String estado) {
         this.idEstado = idEstado;
