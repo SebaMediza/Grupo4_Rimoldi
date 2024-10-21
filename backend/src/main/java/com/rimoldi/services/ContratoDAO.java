@@ -1,14 +1,14 @@
 package com.rimoldi.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sql2o.Connection;
-
-import com.rimoldi.Main;
 import com.rimoldi.interfaces.iContrato;
 import com.rimoldi.models.contrato.Contrato;
 import java.text.SimpleDateFormat;
 
 public class ContratoDAO implements iContrato {
-
+    private static final Logger logger = LoggerFactory.getLogger(ContratoDAO.class);
     @Override
     public boolean getContrato() {
         // TODO Auto-generated method stub
@@ -29,7 +29,7 @@ public class ContratoDAO implements iContrato {
                     .addParameter("idMartillero", contrato.getIdMartillero())
                     .executeUpdate();
         } catch (Exception e) {
-            Main.logger.error("Error al crear el contrato: " + e.getMessage());
+            logger.error("Error al crear el contrato: " + e.getMessage());
             return false;
         }
         return true;

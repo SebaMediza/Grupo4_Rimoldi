@@ -7,8 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Main {
-    public static final Logger logger = LoggerFactory.getLogger(Main.class);
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
     public static void main(String[] args) {
+        logger.info("Iniciando servidor...");
 
         before((req, res) -> {
             res.header("Access-Control-Allow-Origin", "*");
@@ -18,5 +19,6 @@ public class Main {
 
         post("/contrato", ContratoController.postContrato);
         get("/contrato/:nro_contrato", EstadoContratoController.getEstadoContrato);
+        logger.info("Servidor iniciado. Escuchando en el puerto 4567");
     }
 }
