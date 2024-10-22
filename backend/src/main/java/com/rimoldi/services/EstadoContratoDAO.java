@@ -7,8 +7,8 @@ import com.rimoldi.interfaces.iEstadoContrato;
 import com.rimoldi.models.contrato.EstadoContrato;
 
 public class EstadoContratoDAO implements iEstadoContrato {
-    private static final Logger logger = LoggerFactory.getLogger(EstadoContratoDAO.class);
-    public static EstadoContrato getEstadoContrato(int nro_contrato)  {
+    private final Logger logger = LoggerFactory.getLogger(EstadoContratoDAO.class);
+    public EstadoContrato getEstadoContrato(int nro_contrato)  {
         try (Connection conn = SqL2ODAO.getCon().open()) {
             return conn.createQuery("select e.idEstado, p.nombre, p.dni, p.email, p.celular, p.cuil, c.nro_contrato, e.estado from estado e inner join estadocontrato ec on e.idestado = ec.idestado inner join contrato c on ec.nro_contrato = c.nro_contrato inner join inquilino i on c.idPersona = i.idPersona inner join persona p on i.idpersona = p.id where c.nro_contrato = :nro_contrato;")
                 .addParameter("nro_contrato", nro_contrato)
@@ -19,27 +19,15 @@ public class EstadoContratoDAO implements iEstadoContrato {
         }
     }
 
-    public static boolean postEstadoContrato(int nro_contrato) {
-        try (Connection conn = SqL2ODAO.getCon().open()){
-            conn.createQuery("INSERT INTO estadocontrato (nro_contrato, idEstado) VALUES (:nro_contrato, :idEstado)")
-                .addParameter("nro_contrato", nro_contrato)
-                .addParameter("idEstado", 1)
-                .executeUpdate();
-            return true;
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return false;
-        }
-        
+    public boolean postEstadoContrato(int nro_contrato) {
+        throw new UnsupportedOperationException("Unimplemented method 'postEstadoContrato'");
     }
 
     public boolean putEstadoContrato() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'putEstadoContrato'");
     }
 
     public boolean deleteEstadoContrato() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteEstadoContrato'");
     }
 }
