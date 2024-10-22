@@ -16,9 +16,9 @@ public class Contrato {
     private int idInquilino;
     private int idPropiedad;
     private int idMartillero;
-    private List<Garante> garantes;
+    private int idGarante;
 
-    public Contrato(int id, Date fechaInicio, Date fechaFin, Date fechaCancelacion, int idInquilino, int idPropiedad, int idMartillero, List<Garante> garantes) {
+    public Contrato(int id, Date fechaInicio, Date fechaFin, Date fechaCancelacion, int idInquilino, int idPropiedad, int idMartillero, int idGarante) {
         this.id = id;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -26,6 +26,6 @@ public class Contrato {
         this.idInquilino = idInquilino;
         this.idPropiedad = idPropiedad;
         this.idMartillero = idMartillero;
-        this.garantes = garantes;
+        this.idGarante = idGarante;
     }
 }

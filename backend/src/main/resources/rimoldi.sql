@@ -87,7 +87,7 @@ DROP TABLE IF EXISTS `rimoldi`.`Propietario` ;
 
 CREATE TABLE IF NOT EXISTS `rimoldi`.`Propietario` (
   `idPropietario` INT NOT NULL,
-  `cbu` INT NOT NULL,
+  `cbu` BIGINT NOT NULL,
   `idPersona` INT NOT NULL,
   PRIMARY KEY (`idPropietario`, `idPersona`),
   INDEX `fk_Propietario_Persona1_idx` (`idPersona` ASC) VISIBLE,

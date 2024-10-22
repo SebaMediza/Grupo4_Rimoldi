@@ -15,19 +15,46 @@ public class ContratoDAO implements iContrato {
         throw new UnsupportedOperationException("Unimplemented method 'getContrato'");
     }
 
-    public boolean postContrato(Contrato contrato, String garantes) {
+    @Override
+    public boolean insertarContrato(Contrato contrato) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try (Connection conn = SqL2ODAO.getCon().open()) {
-            conn.createQuery("CALL crear_contrato(:nro_contrato, :fechaInicio, :fechaFin, :fechaCancelacion, :idPropiedad, :idPersona, :idMartillero, :garantes)")
-                .addParameter("nro_contrato", contrato.getId())
-                .addParameter("fechaInicio", formatter.format(contrato.getFechaInicio())) // Asume que el formato de fecha es compatible con MySQL
-                .addParameter("fechaFin", formatter.format(contrato.getFechaFin()))
-                .addParameter("fechaCancelacion", contrato.getFechaCancelacion() != null ? formatter.format(contrato.getFechaCancelacion()) : null)
-                .addParameter("idPropiedad", contrato.getIdPropiedad())
-                .addParameter("idPersona", contrato.getIdInquilino())
-                .addParameter("idMartillero", contrato.getIdMartillero())
-                .addParameter("garantes", garantes) // Pasar el JSON con los garantes
-                .executeUpdate();
+            conn.createQuery(
+                    "INSERT INTO contrato (nro_contrato, fecha_inicio, fecha_fin, idPropiedad, idPersona, idMartillero) VALUES (:nro_contrato, :fechaInicio, :fechaFin, :idPropiedad, :idPersona, :idMartillero)")
+                    .addParameter("nro_contrato", contrato.getId())
+                    .addParameter("fechaInicio", formatter.format(contrato.getFechaInicio())) 
+                    .addParameter("fechaFin", formatter.format(contrato.getFechaFin()))
+                    .addParameter("idPropiedad", contrato.getIdPropiedad())
+                    .addParameter("idPersona", contrato.getIdInquilino())
+                    .addParameter("idMartillero", contrato.getIdMartillero())
+                    .executeUpdate();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean insertarFirma(int idContrato, int idGarante) {
+        try (Connection conn = SqL2ODAO.getCon().open()) {
+            conn.createQuery("INSERT INTO firma (idGarante, nro_contrato) VALUES (:idGarante, :nro_contrato)")
+                    .addParameter("idGarante", idGarante)
+                    .addParameter("nro_contrato", idContrato)
+                    .executeUpdate();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean insertarEstado(int nro_contrato) {
+        try (Connection conn = SqL2ODAO.getCon().open()) {
+            conn.createQuery("INSERT INTO estadocontrato (idEstado, nro_contrato) VALUES (1, :nro_contrato);")
+                    .addParameter("nro_contrato", nro_contrato)
+                    .executeUpdate();
         } catch (Exception e) {
             logger.error(e.getMessage());
             return false;
@@ -44,4 +71,5 @@ public class ContratoDAO implements iContrato {
     public boolean deleteContrato() {
         throw new UnsupportedOperationException("Unimplemented method 'deleteContrato'");
     }
+
 }
