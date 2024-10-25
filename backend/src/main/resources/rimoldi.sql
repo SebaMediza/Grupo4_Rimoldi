@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `rimoldi`.`Inquilino` (
   CONSTRAINT `fk_Inquilino_Persona1`
     FOREIGN KEY (`idPersona`)
     REFERENCES `rimoldi`.`Persona` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `rimoldi`.`Garante` (
   CONSTRAINT `fk_Garante_Persona1`
     FOREIGN KEY (`idPersona`)
     REFERENCES `rimoldi`.`Persona` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -94,8 +94,7 @@ CREATE TABLE IF NOT EXISTS `rimoldi`.`Propietario` (
   CONSTRAINT `fk_Propietario_Persona1`
     FOREIGN KEY (`idPersona`)
     REFERENCES `rimoldi`.`Persona` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -122,8 +121,7 @@ CREATE TABLE IF NOT EXISTS `rimoldi`.`Propiedad` (
   CONSTRAINT `fk_Propiedad_Propietario1`
     FOREIGN KEY (`idPropietario`)
     REFERENCES `rimoldi`.`Propietario` (`idPropietario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -142,8 +140,7 @@ CREATE TABLE IF NOT EXISTS `rimoldi`.`Martillero` (
   CONSTRAINT `fk_Martillero_Persona1`
     FOREIGN KEY (`idPersona`)
     REFERENCES `rimoldi`.`Persona` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -167,17 +164,17 @@ CREATE TABLE IF NOT EXISTS `rimoldi`.`Contrato` (
   CONSTRAINT `fk_Contrato_Propiedad1`
     FOREIGN KEY (`idPropiedad`)
     REFERENCES `rimoldi`.`Propiedad` (`idPropiedad`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Contrato_Inquilino1`
     FOREIGN KEY (`idPersona`)
     REFERENCES `rimoldi`.`Inquilino` (`idInquilino`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Contrato_Martillero1`
     FOREIGN KEY (`idMartillero`)
     REFERENCES `rimoldi`.`Martillero` (`idMartillero`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -200,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `rimoldi`.`Familiar` (
   CONSTRAINT `fk_Familiar_Propiedad1`
     FOREIGN KEY (`idPropiedad`)
     REFERENCES `rimoldi`.`Propiedad` (`idPropiedad`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -222,7 +219,7 @@ CREATE TABLE IF NOT EXISTS `rimoldi`.`Comercial` (
   CONSTRAINT `fk_Comercial_Propiedad1`
     FOREIGN KEY (`idPropiedad`)
     REFERENCES `rimoldi`.`Propiedad` (`idPropiedad`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -240,12 +237,12 @@ CREATE TABLE IF NOT EXISTS `rimoldi`.`Firma` (
   CONSTRAINT `fk_Contrato_has_Garante_Contrato1`
     FOREIGN KEY (`nro_contrato`)
     REFERENCES `rimoldi`.`Contrato` (`nro_contrato`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Contrato_has_Garante_Garante1`
     FOREIGN KEY (`idGarante`)
     REFERENCES `rimoldi`.`Garante` (`idGarante`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -277,12 +274,12 @@ CREATE TABLE IF NOT EXISTS `rimoldi`.`EstadoContrato` (
   CONSTRAINT `fk_Contrato_has_Estado_Contrato1`
     FOREIGN KEY (`nro_contrato`)
     REFERENCES `rimoldi`.`Contrato` (`nro_contrato`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Contrato_has_Estado_Estado1`
     FOREIGN KEY (`idEstado`)
     REFERENCES `rimoldi`.`Estado` (`idEstado`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 

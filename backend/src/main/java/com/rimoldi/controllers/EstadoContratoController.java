@@ -13,8 +13,8 @@ import spark.Route;
 public class EstadoContratoController {
     public EstadoContratoController() {
     }
-    private static final Logger logger = LoggerFactory.getLogger(EstadoContratoController.class);
-    private static final String RES_STRING = "application/json";
+    private final Logger logger = LoggerFactory.getLogger(EstadoContratoController.class);
+    private final String RES_STRING = "application/json";
     
     public final Route getEstadoContrato = (req, res) -> {
         /* String tokenPropietario = req.headers("Authorization").split(" ")[1];
@@ -34,7 +34,7 @@ public class EstadoContratoController {
         }
     };
 
-    private static String handleError(Response res, String msj, int status, Gson gson) {
+    private String handleError(Response res, String msj, int status, Gson gson) {
         logger.error(msj);
         res.type(RES_STRING);
         res.status(status);

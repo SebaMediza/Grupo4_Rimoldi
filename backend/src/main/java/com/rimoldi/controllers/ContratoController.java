@@ -11,8 +11,8 @@ import spark.Route;
 
 public class ContratoController {
     public ContratoController() {}
-    private static final String RES_STRING = "application/json";
-    private static final String RES_ERROR = "Error en el servidor";
+    private final String RES_STRING = "application/json";
+    private final String RES_ERROR = "Error en el servidor";
     private final Logger logger = LoggerFactory.getLogger(ContratoController.class);
 
     public final Route postContrato = (Request req, Response res) -> {
