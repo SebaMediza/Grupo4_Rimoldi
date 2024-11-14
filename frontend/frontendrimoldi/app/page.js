@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 
-const carouselImages = [
+const images = [
   { src: "/rimoldiimg1.jpg", alt: "Imagen 1", caption: "Descripción de imagen 1" },
   { src: "/rimoldiimg2.jpg", alt: "Imagen 2", caption: "Descripción de imagen 2" },
   { src: "/rimoldiimg3.jpg", alt: "Imagen 3", caption: "Descripción de imagen 3" },
@@ -19,23 +19,18 @@ export default function Home() {
     router.push("/sesion");
   };
 
-  // Cambia la imagen automáticamente cada 3 segundos
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % carouselImages.length);
-    }, 3000);
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 3000); // Cambia la imagen cada 3 segundos
     return () => clearInterval(interval);
   }, []);
 
-  const handleImageLoad = () => {
-    setLoading(false);  // Desactiva el estado de carga una vez que la imagen se carga
-  };
 
   return (
     <div className={styles.page}>
-      {/* Menú */}
       <header className={styles.header}>
-        <Image src="/logo.png" alt="Logo" width={100} height={40} />
+        <Image src="/rimoldi-logo.png" alt="Logo" width={100} height={40} />
         <nav className={styles.nav}>
           <a href="/">Inicio</a>
           <a href="/about">Nosotros</a>
@@ -46,25 +41,23 @@ export default function Home() {
         </nav>
       </header>
 
-      {/* Título y Carrusel */}
       <main className={styles.main}>
         <h1>Bienvenidos a Inmobiliaria Rimoldi</h1>
-        <div className={styles.carousel}>
+
+        <div className={styles.imageContainer}>
           {loading ? (
-            <div className={styles.loader}>Cargando...</div> 
+            <div className={styles.loader}>Cargando...</div>
           ) : (
             <Image
-              src={carouselImages[currentImage].src}
-              alt={carouselImages[currentImage].alt}
+              src={images[currentImage].src}
+              alt={images[currentImage].alt}
               width={1200}
               height={600}
-              onLoadingComplete={handleImageLoad} 
             />
           )}
-          <p className={styles.caption}>{carouselImages[currentImage].caption}</p>
+          <p className={styles.caption}>{images[currentImage].caption}</p>
         </div>
 
-        {/* Información de la inmobiliaria */}
         <section className={styles.infoSection}>
           <div className={styles.infoBox}>
             <h3>Buenos tratos</h3>
@@ -81,7 +74,6 @@ export default function Home() {
         </section>
       </main>
 
-      {/* Footer */}
       <footer className={styles.footer}>
         <p>© 2023 Inmobiliaria Rimoldi. Todos los derechos reservados.</p>
         <nav>
