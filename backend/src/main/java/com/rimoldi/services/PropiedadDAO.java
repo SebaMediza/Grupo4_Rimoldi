@@ -4,8 +4,8 @@ import com.rimoldi.models.propiedad.Propiedad;
 
 public class PropiedadDAO extends CrudDAO<Propiedad> {
 
-    String tableName = "propiedad";
-    String tablePK = "idPropiedad";
+    private String tableName = "propiedad";
+    private String tablePK = "idPropiedad";
 
     @Override
     public Class<Propiedad> getTClass() {

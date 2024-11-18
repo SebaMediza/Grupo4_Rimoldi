@@ -1,11 +1,9 @@
 package com.rimoldi.models.propiedad;
 
 import lombok.Data;
-/* import lombok.EqualsAndHashCode; */
-/* @EqualsAndHashCode(callSuper = true) */
 
 @Data
-public class Comercial /* extends Propiedad */ {
+public class Comercial {
     private int idComercial;
     private String permisos_municipales;
     private boolean baño;

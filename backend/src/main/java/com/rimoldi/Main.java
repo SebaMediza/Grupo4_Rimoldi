@@ -24,6 +24,7 @@ public class Main {
         post("/contrato", contratoController.postContrato);
         get("/contrato/:nro_contrato", estadoContratoController.getEstadoContrato);
         post("/propiedad", propiedadController.postPropiedad);
+        get("/propiedad", propiedadController.getPropiedades);
         logger.info("Servidor iniciado. Escuchando en el puerto 4567");
     }
 }

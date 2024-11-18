@@ -71,4 +71,9 @@ public class PropiedadController {
                 return gson.toJson("Error en el servidor");
         }// Crear los objetos
     };
+
+    public Route getPropiedades = (Request req, Response res) -> {
+        res.type("application/json");
+        return gson.toJson(propiedadDAO.get());
+    };
 }

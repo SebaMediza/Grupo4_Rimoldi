@@ -1,37 +1,6 @@
 package com.rimoldi.services;
 
-/* import java.lang.reflect.Field;
-
 import org.sql2o.Connection;
-
-public abstract class CrudDAO<T> {
-    public abstract Class<T> getTClass();
-
-    public abstract String getTablePK();
-
-    public abstract String getTableName();
-
-    public void insert(T t) {
-        Class cls = t.getClass();
-        Field[] fields = cls.getDeclaredFields();
-        String valuesInsertSQL = " (";
-        String columnsInsertSQL = " (";
-        String name;
-        for (Field field : fields) {
-            name = field.getName();
-            columnsInsertSQL = columnsInsertSQL + " " + name + " ,";
-            valuesInsertSQL = valuesInsertSQL + " :" + name + " ,";
-        }
-        String insertSQL = "INSERT INTO " + getTableName() + " " + columnsInsertSQL + " VALUES " + valuesInsertSQL;
-        try (Connection con = SqL2ODAO.getCon().open()) {
-            con.createQuery(insertSQL).bind(t).executeUpdate();
-        }
-    }
-} */
-
-import org.sql2o.Connection;
-import org.sql2o.Sql2o;
-import com.rimoldi.services.SqL2ODAO;
 import java.lang.reflect.Field;
 import java.util.List;
 
@@ -41,8 +10,6 @@ import java.util.List;
  * @param <T> Tipo genérico que representa la entidad gestionada.
  */
 public abstract class CrudDAO<T> {
-    /* private final Class<T> type;
-    private final Sql2o sql2o; */
 
     public abstract Class<T> getTClass();
     public abstract String getTablePK();
@@ -54,10 +21,6 @@ public abstract class CrudDAO<T> {
      * @param type  Clase del tipo genérico (ejemplo: MyEntity.class).
      * @param sql2o Conexión Sql2o a la base de datos.
      */
-    /* public CrudDAO(Class<T> type, Sql2o sql2o) {
-        this.type = type;
-        this.sql2o = sql2o;
-    } */
 
     /**
      * Inserta una nueva entidad en la base de datos.
@@ -98,11 +61,10 @@ public abstract class CrudDAO<T> {
      * @return Lista de todas las entidades almacenadas.
      */
     public List<T> get() {
-        throw new UnsupportedOperationException("Not supported yet.");
-        /* String selectSQL = "SELECT * FROM " + getTableName();
+        String selectSQL = "SELECT * FROM " + getTableName() + " WHERE disponible = 1";
         try (Connection con = SqL2ODAO.getCon().open()) {
-            return con.createQuery(selectSQL).executeAndFetch(type);
-        } */
+            return con.createQuery(selectSQL).executeAndFetch(getTClass());
+        }
     }
 
     /**

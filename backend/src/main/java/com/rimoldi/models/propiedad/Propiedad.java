@@ -16,4 +16,5 @@ public class Propiedad {
     private String cuidad;
     private int idPropietario;
     private Date fecha_precio_minimo;
+    private int disponible;
 }

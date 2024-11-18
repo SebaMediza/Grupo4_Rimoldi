@@ -4,8 +4,8 @@ import com.rimoldi.models.propiedad.Comercial;
 
 public class ComercialDAO extends CrudDAO<Comercial> {
 
-    String tableName = "comercial";
-    String tablePK = "idComercial";
+    private String tableName = "comercial";
+    private String tablePK = "idComercial";
 
     @Override
     public Class<Comercial> getTClass() {

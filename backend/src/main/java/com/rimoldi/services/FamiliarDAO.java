@@ -4,8 +4,8 @@ import com.rimoldi.models.propiedad.Familiar;
 
 public class FamiliarDAO extends CrudDAO<Familiar> {
 
-    String tableName = "familiar";
-    String tablePK = "idFamiliar";
+    private String tableName = "familiar";
+    private String tablePK = "idFamiliar";
 
     @Override
     public Class<Familiar> getTClass() {
