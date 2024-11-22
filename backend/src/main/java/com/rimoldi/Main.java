@@ -17,7 +17,6 @@ public class Main {
         EstadoContratoController estadoContratoController = new EstadoContratoController();
         MartilleroController martilleroController=new MartilleroController();
         PropiedadController propiedadController = new PropiedadController();
-        
         before((req, res) -> {
             res.header("Access-Control-Allow-Origin", "*");
             res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");

@@ -1,6 +1,7 @@
 package com.rimoldi.services;
 
 import org.sql2o.Connection;
+import com.rimoldi.interfaces.iCrudDAO;
 import java.lang.reflect.Field;
 import java.util.List;
 
@@ -9,26 +10,14 @@ import java.util.List;
  * 
  * @param <T> Tipo genérico que representa la entidad gestionada.
  */
-public abstract class CrudDAO<T> {
-
-    public abstract Class<T> getTClass();
-    public abstract String getTablePK();
-    public abstract String getTableName();
-
-    /**
-     * Constructor que inicializa la clase y la conexión.
-     * 
-     * @param type  Clase del tipo genérico (ejemplo: MyEntity.class).
-     * @param sql2o Conexión Sql2o a la base de datos.
-     */
-
+public abstract class CrudDAO<T> implements iCrudDAO<T> {
     /**
      * Inserta una nueva entidad en la base de datos.
      * 
      * @param t Entidad a insertar.
      * @throws Exception Si ocurre un error durante la inserción.
      */
-    public void insert(T t) throws Exception {
+    public void insert(T t) {
         Class<?> cls = t.getClass();
         Field[] fields = cls.getDeclaredFields();
         StringBuilder columnsInsertSQL = new StringBuilder("(");
@@ -51,7 +40,6 @@ public abstract class CrudDAO<T> {
 
         try (Connection con = SqL2ODAO.getCon().open()) {
             con.createQuery(insertSQL).bind(t).executeUpdate();
-            System.out.println("Entidad insertada: " + t);
         }
     }
 
@@ -61,7 +49,7 @@ public abstract class CrudDAO<T> {
      * @return Lista de todas las entidades almacenadas.
      */
     public List<T> get() {
-        String selectSQL = "SELECT * FROM " + getTableName() + " WHERE disponible = 1";
+        String selectSQL = "SELECT * FROM " + getTableName();
         try (Connection con = SqL2ODAO.getCon().open()) {
             return con.createQuery(selectSQL).executeAndFetch(getTClass());
         }
@@ -75,29 +63,8 @@ public abstract class CrudDAO<T> {
      * @param t       Nuevos valores de la entidad.
      * @throws Exception Si ocurre un error durante la actualización.
      */
-    public void update(String idField, Object idValue, T t) throws Exception {
+    public void update(String idField, Object idValue, T t) {
         throw new UnsupportedOperationException("Not supported yet.");
-        /*  Class<?> cls = t.getClass();
-        Field[] fields = cls.getDeclaredFields();
-        StringBuilder setSQL = new StringBuilder();
-
-        for (Field field : fields) {
-            String name = field.getName();
-            setSQL.append(name).append(" = :").append(name).append(",");
-        }
-
-        // Quitar la última coma
-        setSQL.setLength(setSQL.length() - 1);
-
-        String updateSQL = "UPDATE " + getTableName() + " SET " + setSQL + " WHERE " + idField + " = :idValue";
-
-        try (Connection con = SqL2ODAO.getCon().open()) {
-            con.createQuery(updateSQL)
-                    .addParameter("idValue", idValue)
-                    .bind(t)
-                    .executeUpdate();
-            System.out.println("Entidad actualizada con " + idField + " = " + idValue);
-        } */
     }
 
     /**
@@ -107,15 +74,7 @@ public abstract class CrudDAO<T> {
      * @param idValue Valor del identificador.
      * @throws Exception Si ocurre un error durante la eliminación.
      */
-    public void delete(String idField, Object idValue) throws Exception {
+    public void delete(String idField, Object idValue) {
         throw new UnsupportedOperationException("Not supported yet.");
-        /* String deleteSQL = "DELETE FROM " + getTableName() + " WHERE " + idField + " = :idValue";
-
-        try (Connection con = SqL2ODAO.getCon().open()) {
-            con.createQuery(deleteSQL)
-                    .addParameter("idValue", idValue)
-                    .executeUpdate();
-            System.out.println("Entidad eliminada con " + idField + " = " + idValue);
-        } */
     }
 }

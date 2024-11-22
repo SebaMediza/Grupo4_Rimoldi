@@ -271,7 +271,7 @@ CREATE TABLE IF NOT EXISTS `rimoldi`.`EstadoContrato` (
   `idEstado` INT NOT NULL,
   PRIMARY KEY (`nro_contrato`, `idEstado`),
   INDEX `fk_Contrato_has_Estado_Estado1_idx` (`idEstado` ASC) ,
-  INDEX `fk_Contrato_has_Estado_Contrato1_idx` (`nro_contrato` ASC) ,
+  INDEX `fk_Contrato_has_Estado_Contrato1_idx` (`nro_contrato` ASC),
   CONSTRAINT `fk_Contrato_has_Estado_Contrato1`
     FOREIGN KEY (`nro_contrato`)
     REFERENCES `rimoldi`.`Contrato` (`nro_contrato`)

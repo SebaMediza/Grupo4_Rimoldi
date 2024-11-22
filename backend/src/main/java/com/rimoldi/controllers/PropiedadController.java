@@ -6,13 +6,10 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.Part;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.google.gson.*;
 import com.rimoldi.models.propiedad.Comercial;
 import com.rimoldi.models.propiedad.Familiar;
@@ -23,7 +20,7 @@ import com.rimoldi.services.PropiedadDAO;
 
 import spark.*;
 
-public class PropiedadController{
+public class PropiedadController {
     private PropiedadDAO propiedadDAO;
     private ComercialDAO comercialDAO;
     private FamiliarDAO familiarDAO;
@@ -35,7 +32,6 @@ public class PropiedadController{
         propiedadDAO = new PropiedadDAO();
         comercialDAO = new ComercialDAO();
         familiarDAO = new FamiliarDAO();
-
     }
 
     public String getTipoValue(String jsonString) {
@@ -110,7 +106,6 @@ public class PropiedadController{
             return gson.toJson("Error en el servidor");
         }
     };
-    
 
     public Route getPropiedades = (Request req, Response res) -> {
         res.type("application/json");
