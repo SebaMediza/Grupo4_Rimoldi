@@ -111,4 +111,14 @@ public class PropiedadController {
         res.type("application/json");
         return gson.toJson(propiedadDAO.get());
     };
+
+    public Route getFamiliares = (Request req, Response res) -> {
+        res.type("application/json");
+        return gson.toJson(familiarDAO.get());
+    };
+
+    public Route getComerciales = (Request req, Response res) -> {
+        res.type("application/json");
+        return gson.toJson(comercialDAO.get());
+    };
 }

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./registrarPropiedad.module.css";
 import Navbar from "/components/NavbarLogeado/navbar";
 import Footer from "/components/Footer/footer";
@@ -55,6 +55,63 @@ const RegistrarPropiedad = () => {
       });
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:4567/propiedad", 
+        { method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+        );
+        const data = await response.json();
+        const lastItem = data[data.length - 1].idPropiedad + 1;
+        setFormData((...prevData) => ({
+          ...prevData,
+          idPropiedad: lastItem,
+        }));
+      } catch (err) {
+        console.error(err);
+      }
+      try {
+        const response = await fetch("http://localhost:4567/familiar", 
+        { method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+        );
+        const data = await response.json();
+        const lastItem = data[data.length - 1].idFamiliar + 1;
+        setFormData((...prevData) => ({
+          ...prevData,
+          idFamiliar: lastItem,
+        }));
+      } catch (err) {
+        console.error(err);
+      }
+      try {
+        const response = await fetch("http://localhost:4567/comercial", 
+        { method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+        );
+        const data = await response.json();
+        const lastItem = data[data.length - 1].idComercial + 1;
+        setFormData((...prevData) => ({
+          ...prevData,
+          idComercial: lastItem,
+        }));
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchData();
+  }, []);
   
   
 
@@ -140,6 +197,7 @@ const RegistrarPropiedad = () => {
             onChange={handleChange}
             required
             className={styles.input}
+            readOnly
           />
           <input
             type="text"
@@ -273,6 +331,7 @@ const RegistrarPropiedad = () => {
                 value={formData.idFamiliar}
                 onChange={handleChange}
                 className={styles.input}
+                readOnly
               />
                <input
                 type="number"
@@ -281,6 +340,7 @@ const RegistrarPropiedad = () => {
                 value={formData.idPropiedad}
                 onChange={handleChange}
                 className={styles.input}
+                readOnly
               />
               <input
                 type="number"
@@ -348,6 +408,7 @@ const RegistrarPropiedad = () => {
                 value={formData.idComercial}
                 onChange={handleChange}
                 className={styles.input}
+                readOnly
               />
               <input
                 type="text"
@@ -364,6 +425,7 @@ const RegistrarPropiedad = () => {
                 value={formData.idPropiedad}
                 onChange={handleChange}
                 className={styles.input}
+                readOnly
               />
               <label className={styles.checkboxLabel}>
               Tiene baño

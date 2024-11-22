@@ -1,7 +1,5 @@
 'use client';
 import { useState, useEffect } from "react";
-'use client';
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import styles from "./globals.css";

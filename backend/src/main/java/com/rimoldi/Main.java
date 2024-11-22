@@ -35,6 +35,8 @@ public class Main {
         post("/login", martilleroController.getMartillero);
         post("/propiedad", propiedadController.postPropiedad);
         get("/propiedad", propiedadController.getPropiedades);
+        get("/familiar", propiedadController.getFamiliares);
+        get("/comercial", propiedadController.getComerciales);
         logger.info("Servidor iniciado. Escuchando en el puerto 4567");
     }
 }
