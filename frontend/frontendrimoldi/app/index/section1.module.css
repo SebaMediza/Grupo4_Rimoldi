@@ -1,0 +1,73 @@
+/* Estilos generales del contenedor */
+.main {
+    flex: 1;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    background-color: white;
+}
+
+/* Contenedor de la imagen */
+.imageContainer {
+    position: relative;
+    width: 100%; /* Ocupa todo el ancho disponible */
+    height: 0;
+    padding-top: 56.25%; /* Relación de aspecto 16:9 (puedes ajustarlo si lo prefieres) */
+    overflow: hidden; /* Evita el desbordamiento de la imagen */
+    display: flex;
+    justify-content: center; /* Centra la imagen horizontalmente */
+    align-items: center; /* Centra la imagen verticalmente */
+    margin-bottom: 2rem;
+}
+
+/* Imagen ajustada */
+.imageContainer img {
+    object-fit: cover; /* Recorta la imagen sin estirarla */
+    position: absolute; /* Para que la imagen se ajuste y recorte dentro del contenedor */
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Centra la imagen horizontalmente */
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    height: 100%; /* Se ajusta a la altura del contenedor */
+}
+
+
+
+/* Texto de subtítulo para la imagen */
+.caption {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: white;
+}
+
+/* Sección de información */
+.infoSection {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    margin-top: 2rem;
+    background-color: #435951;
+    padding: 1.5rem;
+    
+}
+
+/* Caja individual de información */
+.infoBox {
+    width: 30%;
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos del título de infoBox */
+.infoBox h3 {
+    font-size: 1.2rem;
+    color: #000000; /* Ajuste de color para contraste */
+    margin-bottom: 0.5rem;
+}
+
+/* Estilos del texto de infoBox */
+.infoBox p {
+    font-size: 1rem;
+    color: #5a5a5a;
+}

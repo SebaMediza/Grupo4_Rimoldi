@@ -1,9 +1,7 @@
 package com.rimoldi.services;
 
 import org.sql2o.Connection;
-
 import com.rimoldi.interfaces.iCrudDAO;
-
 import java.lang.reflect.Field;
 import java.util.List;
 
@@ -13,14 +11,6 @@ import java.util.List;
  * @param <T> Tipo genérico que representa la entidad gestionada.
  */
 public abstract class CrudDAO<T> implements iCrudDAO<T> {
-
-    /**
-     * Constructor que inicializa la clase y la conexión.
-     * 
-     * @param type  Clase del tipo genérico (ejemplo: MyEntity.class).
-     * @param sql2o Conexión Sql2o a la base de datos.
-     */
-
     /**
      * Inserta una nueva entidad en la base de datos.
      * 

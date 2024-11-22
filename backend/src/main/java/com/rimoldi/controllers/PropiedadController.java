@@ -1,8 +1,15 @@
 package com.rimoldi.controllers;
 
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.http.Part;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.google.gson.*;
 import com.rimoldi.models.propiedad.Comercial;
 import com.rimoldi.models.propiedad.Familiar;
@@ -33,43 +40,71 @@ public class PropiedadController {
     }
 
     public Route postPropiedad = (Request req, Response res) -> {
-        JsonArray jsonArrayParsed = JsonParser.parseString(req.body()).getAsJsonArray();
-        Propiedad propiedad = gson.fromJson(jsonArrayParsed.get(1), Propiedad.class);
-        switch (getTipoValue(jsonArrayParsed.get(0).toString())) {
-            case "comercial":
-                try {
-                    Comercial comercial = gson.fromJson(jsonArrayParsed.get(2), Comercial.class);
+        //multipart para recibir archivos
+        req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+    
+        //leo el json como array json
+        Part jsonPart = req.raw().getPart("json");
+        JsonArray jsonArray = JsonParser.parseReader(new InputStreamReader(jsonPart.getInputStream())).getAsJsonArray();
+    
+        //tipo de propiedad
+        JsonObject tipoObject = jsonArray.get(0).getAsJsonObject();
+        String tipoPropiedad = tipoObject.get("tipo").getAsString();
+    
+        //imagen
+        Part filePart = req.raw().getPart("imagen");
+        String imageName = null;
+    
+        if (filePart != null) {
+            //nombre de la imagen
+            imageName = filePart.getSubmittedFileName();
+            //creo la carpeta para guardar imagenes si no existe
+            File uploadsDir = new File("frontend/frontendrimoldi/public/assets/uploads");
+            if (!uploadsDir.exists()) {
+                uploadsDir.mkdirs();
+            }
+    
+            //guardo la imagen en la ruta especificada
+            Path imagePath = Path.of("frontend/frontendrimoldi/public/assets/uploads", imageName);
+            try (InputStream inputStream = filePart.getInputStream()) {
+                Files.copy(inputStream, imagePath, StandardCopyOption.REPLACE_EXISTING);
+            }
+        }
+    
+        //guardo el nombre de la imagen en el json para guardar en la bd
+        if (imageName != null) {
+            jsonArray.get(1).getAsJsonObject().addProperty("imagen", imageName);
+        }
+    
+        Propiedad propiedad = gson.fromJson(jsonArray.get(1), Propiedad.class);
+    
+        try {
+            switch (tipoPropiedad) {
+                case "comercial":
+                    Comercial comercial = gson.fromJson(jsonArray.get(2), Comercial.class);
                     propiedadDAO.insert(propiedad);
                     comercialDAO.insert(comercial);
-                    res.type("application/json");
-                    res.status(201);
-                    return gson.toJson("Propiedad creada");
-                } catch (Exception e) {
-                    // return handleError(res, "Error en el servidor", 500);
-                    // throw new Exception("Error en el servidor");
-                    res.status(500);
-                    logger.error(e.getMessage());
-                    return gson.toJson("Error en el servidor");
-                }
-            case "familiar":
-                try {
-                    Familiar familiar = gson.fromJson(jsonArrayParsed.get(2), Familiar.class);
+                    break;
+    
+                case "familiar":
+                    Familiar familiar = gson.fromJson(jsonArray.get(2), Familiar.class);
                     propiedadDAO.insert(propiedad);
                     familiarDAO.insert(familiar);
-                    res.type("application/json");
-                    res.status(201);
-                    return gson.toJson("Propiedad creada");
-                } catch (Exception e) {
-                    // return handleError(res, "Error en el servidor", 500);
-                    // throw new Exception("Error en el servidor");
-                    res.status(500);
-                    logger.error(e.getMessage());
-                    return gson.toJson("Error en el servidor");
-                }
-            default:
-                res.status(500);
-                return gson.toJson("Error en el servidor");
-        }// Crear los objetos
+                    break;
+    
+                default:
+                    res.status(400);
+                    return gson.toJson("Tipo de propiedad no válido");
+            }
+            res.type("application/json");
+            res.status(201);
+            return gson.toJson("Propiedad creada exitosamente");
+    
+        } catch (Exception e) {
+            res.status(500);
+            logger.error(e.getMessage());
+            return gson.toJson("Error en el servidor");
+        }
     };
 
     public Route getPropiedades = (Request req, Response res) -> {
