@@ -30,8 +30,6 @@ public class PropiedadController {
     public PropiedadController() {
         gson = new Gson();
         propiedadDAO = new PropiedadDAO();
-        comercialDAO = new ComercialDAO();
-        familiarDAO = new FamiliarDAO();
     }
 
     public String getTipoValue(String jsonString) {
@@ -81,12 +79,14 @@ public class PropiedadController {
         try {
             switch (tipoPropiedad) {
                 case "comercial":
+                    comercialDAO = new ComercialDAO();
                     Comercial comercial = gson.fromJson(jsonArray.get(2), Comercial.class);
                     propiedadDAO.insert(propiedad);
                     comercialDAO.insert(comercial);
                     break;
     
                 case "familiar":
+                    familiarDAO = new FamiliarDAO();
                     Familiar familiar = gson.fromJson(jsonArray.get(2), Familiar.class);
                     propiedadDAO.insert(propiedad);
                     familiarDAO.insert(familiar);
