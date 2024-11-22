@@ -1,9 +1,6 @@
 package com.rimoldi.models.contrato;
 
 import java.util.Date;
-import java.util.List;
-
-import com.rimoldi.models.persona.Garante;
 
 import lombok.Data;
 

@@ -1,0 +1,67 @@
+.page {
+    min-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+.footer {
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 40px 20px;
+    text-align: center;
+}
+.logo {
+    width: 100px;
+    height: 50px;
+}
+
+/* Contenido del footer */
+.footerContent {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Secciones del footer */
+.footerSection {
+    margin-bottom: 20px;
+}
+
+.footerSection h4 {
+    color: #b11a1a;
+    /* Azul */
+    margin-bottom: 10px;
+    
+}
+
+.footerSection p{
+    color: #333;
+    text-decoration: none;
+    margin-left: 70px;
+    margin-right: 70px;
+}
+
+.footerSection a {
+    color: #333;
+    text-decoration: none;
+}
+
+/* Íconos de redes sociales */
+.socialIcons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.socialIcons a {
+    padding: 8px 12px;
+    transition: background-color 0.3s;
+}
+
+.footerBottom {
+    margin-top: 20px;
+    color: #666;
+    font-size: 14px;
+}

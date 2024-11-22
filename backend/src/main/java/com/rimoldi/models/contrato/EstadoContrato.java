@@ -6,8 +6,6 @@ import lombok.Data;
 public class EstadoContrato {
     private int nro_contrato;
     private int idEstado;
-
-    //private int nro_contrato;
     private String nombre;
     private long dni;
     private String email;

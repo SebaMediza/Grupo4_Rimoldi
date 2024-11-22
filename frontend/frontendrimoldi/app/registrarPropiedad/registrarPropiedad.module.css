@@ -1,0 +1,120 @@
+.container {
+    margin-top: 5%;
+    background-color: #ffffff;
+    max-width: 75%;
+    margin: auto;
+    padding: 30px;
+    box-shadow: 0 0 10px #bbbaba;
+    border-radius: 2px;
+}
+
+.h1 {
+    text-align: center;
+    margin-bottom: 4%;
+}
+
+.form {
+    display: grid;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.input {
+    width: 100%;
+    padding: 8px;
+    font-size: 15px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+    background-color: #f1f1f1;
+}
+
+.input:focus {
+    border-color: #852020;
+    outline: none;
+    box-shadow: 0 0 5px rgba(177, 16, 16, 0.5);
+}
+
+.label {
+    display: block;
+    margin-bottom: 2%;
+}
+
+.labelSelect {
+    margin-top: 1%;
+    align-items: center;
+    grid-column: span 3;
+    width: 30%;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.checkboxLabel {
+    grid-column: span 3;
+    font-size: 15px;
+    display: block;
+    margin-right: 2%;
+    padding: auto;
+}
+
+.labelArchivo{
+    margin-top: 1%;
+    align-items: center;
+    grid-column: span 3;
+    width: 30%;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.inputArchivo{
+   margin-top: 3%;
+   font-size: 14px;
+}
+
+.checkboxLabel input {
+    margin-left: 1%;
+    cursor: pointer;
+}
+
+.select {
+    width: 100%;
+    padding: 8px;
+    font-size: 15px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+    margin-top: 3%;
+    background-color: #f1f1f1;
+}
+
+.select:focus {
+    border-color: #852020;
+    outline: none;
+    box-shadow: 0 0 5px rgba(177, 16, 16, 0.5);
+}
+
+.select option:hover {
+    background-color: #b11a1a;
+}
+
+.button {
+    width: 25%;
+    grid-column: span 3;
+    padding: 12px;
+    background-color: #b11a1a;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 15px;
+    justify-self: center;
+    /* Centra horizontalmente */
+    align-self: center;
+    /* Centra verticalmente */
+}
+
+.button:hover {
+    background-color: #961a1a;
+}

@@ -4,14 +4,18 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public abstract class Propiedad {
-    private int id;
+public class Propiedad {
+    private int idPropiedad;
     private String direccion;
-    private int alquiler_minimo;
-    private int m2Cubiertos;
-    private int m2Descubiertos;
+    private int alquiler;
+    private int m2_cubiertos;
+    private int m2_descubiertos;
     private String condiciones_garantes;
-    private Double expensas_minimno;
-    private Double gastos_minimos;
+    private Double expensas;
+    private Double gastos;
+    private String cuidad;
+    private int idPropietario;
     private Date fecha_precio_minimo;
+    private boolean disponible;
+    private String imagen;
 }
