@@ -9,14 +9,6 @@ const Propiedades = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Array de imágenes para las propiedades
-    const imagenes = [
-        '/assets/img/test.jpg',
-        '/assets/img/test2.jpg',
-        '/assets/img/test3.jpg',
-        '/assets/img/test4.jpg',
-    ];
-
     const fetchPropiedades = async () => {
         try {
             const response = await fetch("http://localhost:4567/propiedad", {
@@ -43,6 +35,7 @@ const Propiedades = () => {
     useEffect(() => {
         fetchPropiedades();
     }, []);
+
 
     const cargarMas = () => {
         setVisibleCount((prev) => prev + 4); // Mostrar 4 más al cargar

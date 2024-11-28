@@ -1,3 +1,5 @@
+
+/* Estilos generales del contenedor */
 .main {
     flex: 1;
     text-align: center;
@@ -12,7 +14,7 @@
     /* Ocupa todo el ancho disponible */
     height: 0;
     padding-top: 56.25%;
-    /* Relación de aspecto 16:9 (puedes ajustarlo si lo prefieres) */
+    /* Relación de aspecto 16:9 */
     overflow: hidden;
     /* Evita el desbordamiento de la imagen */
     display: flex;
@@ -20,7 +22,6 @@
     /* Centra la imagen horizontalmente */
     align-items: center;
     /* Centra la imagen verticalmente */
-
 }
 
 /* Imagen ajustada */
@@ -38,7 +39,6 @@
     height: 100%;
     /* Se ajusta a la altura del contenedor */
 }
-
 /* Texto de subtítulo para la imagen */
 .caption {
     margin-top: 0.5rem;
@@ -56,10 +56,6 @@
     padding-top: 0;
 
 }
-
-/* Caja individual de información */
-
-/* Caja individual de información */
 .infoBox {
     width: 30%;
     background-color: #ffffff;
@@ -76,7 +72,6 @@
 .infoBox h3 {
     font-size: 1.2rem;
     color: #000000;
-    /* Ajuste de color para contraste */
     margin-bottom: 0.5rem;
 }
 

@@ -7,13 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Map;
-
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.Part;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.google.gson.*;
 import com.rimoldi.models.propiedad.Comercial;
 import com.rimoldi.models.propiedad.Familiar;
@@ -46,6 +43,7 @@ public class PropiedadController {
     }
 
     public Route postPropiedad = (Request req, Response res) -> {
+
         // multipart para recibir archivos
         req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
 
@@ -69,8 +67,6 @@ public class PropiedadController {
             if (!uploadsDir.exists()) {
                 uploadsDir.mkdirs();
             }
-
-            // guardo la imagen en la ruta especificada
             Path imagePath = Path.of("frontend/frontendrimoldi/public/assets/uploads", imageName);
             try (InputStream inputStream = filePart.getInputStream()) {
                 Files.copy(inputStream, imagePath, StandardCopyOption.REPLACE_EXISTING);
@@ -97,7 +93,7 @@ public class PropiedadController {
                     propiedadDAO.insert(propiedad);
                     familiarDAO.insert(familiar);
                     break;
-
+                
                 default:
                     res.status(400);
                     return gson.toJson("Tipo de propiedad no válido");
@@ -105,7 +101,6 @@ public class PropiedadController {
             res.type("application/json");
             res.status(201);
             return gson.toJson("Propiedad creada exitosamente");
-
         } catch (Exception e) {
             res.status(500);
             logger.error(e.getMessage());

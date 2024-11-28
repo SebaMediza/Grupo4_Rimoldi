@@ -25,7 +25,6 @@ const Login = () => {
       });
 
       const data = await response.json();
-      console.log(data);
       if (response.ok) {
         localStorage.setItem("token", data.token);
         if (data.rol === "propietario") {
@@ -108,3 +107,4 @@ const Login = () => {
 };
 
 export default Login;
+

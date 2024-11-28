@@ -51,6 +51,7 @@ public class ContratoController {
             }
             res.type(RES_STRING);
             res.status(201);
+            //res lo q quiera para dvolver los datos
             return gson.toJson("Contrato creado");
         } catch (Exception e) {
             logger.error(e.getMessage());

@@ -25,7 +25,6 @@ public class Main {
         MartilleroController martilleroController=new MartilleroController();
         GaranteController garanteController=new GaranteController();
         InquilinoController inquilinoController=new InquilinoController();
-        
         before((req, res) -> {
             res.header("Access-Control-Allow-Origin", "*");
             res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");

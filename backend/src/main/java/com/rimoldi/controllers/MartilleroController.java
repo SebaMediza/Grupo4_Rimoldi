@@ -2,11 +2,9 @@ package com.rimoldi.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.rimoldi.services.MartilleroDAO;
-
 import spark.Response;
 import spark.Route;
 
@@ -34,7 +32,6 @@ public class MartilleroController {
             return handleError(res, "No se pudo obtener el username", 404, gson);
         }
     };
-
     private String handleError(Response res, String msj, int status, Gson gson) {
         logger.error(msj);
         res.type(RES_STRING);
