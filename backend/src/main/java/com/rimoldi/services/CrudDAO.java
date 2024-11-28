@@ -3,7 +3,7 @@ package com.rimoldi.services;
 import org.sql2o.Connection;
 import java.lang.reflect.Field;
 import java.util.List;
-
+import com.rimoldi.interfaces.iCrudDAO;
 /**
  * Clase genérica para implementar un CRUD utilizando reflexión y Sql2o.
  * 
