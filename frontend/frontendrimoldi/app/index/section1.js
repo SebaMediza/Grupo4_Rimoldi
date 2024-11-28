@@ -9,7 +9,7 @@ const images = [
   { src: "/assets/img/web AV113.jpg", alt: "Imagen 1", caption: "Descripción de imagen 1" },
   { src: "/assets/img/web-07.jpg", alt: "Imagen 2", caption: "Descripción de imagen 2" },
   { src: "/assets/img/web-09.jpg", alt: "Imagen 3", caption: "Descripción de imagen 3" },
-
+];
 export default function Section1() {
   const [currentImage, setCurrentImage] = useState(0);
   const [loading, setLoading] = useState(true);
