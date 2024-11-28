@@ -22,5 +22,16 @@ public class PropietarioDAO implements iPropietario{
         }
     }
 
+    public int getId(String username){
+        try (Connection conn = SqL2ODAO.getCon().open()) {
+            return conn.createQuery("SELECT idPropietario from propietario,persona where propietario.idPersona=persona.id and username LIKE :username;")
+                .addParameter("username",username)
+                .executeAndFetchFirst(Integer.class);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return -1;
+        }
+    }
+    
     
 }

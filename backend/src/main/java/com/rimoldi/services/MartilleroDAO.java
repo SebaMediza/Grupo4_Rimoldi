@@ -23,4 +23,14 @@ public class MartilleroDAO implements iMartillero{
             return null;
         }
     }
+    public int getId(String username){
+        try (Connection conn = SqL2ODAO.getCon().open()) {
+            return conn.createQuery("SELECT idMartillero from martillero,persona where martillero.idPersona=persona.id and username LIKE :username;")
+                .addParameter("username",username)
+                .executeAndFetchFirst(Integer.class);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return -1;
+        }
+    }
 }

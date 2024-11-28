@@ -1,14 +1,15 @@
 "use client";
 import React, { useState } from "react";
-import Navbar from "/components/NavbarPropietario/navbar";
+import Navbar from "/components/NavbarMartillero/navbar";
 import Footer from "/components/Footer/footer";
-import VerEstadoContrato from './VerEstadoContrato';
+import CrearContrato from "./crearContrato";
+
 
 const Home = () => {
     return (
         <div>
             <Navbar />
-            <VerEstadoContrato />
+            <CrearContrato />
             <Footer />
         </div>
     );

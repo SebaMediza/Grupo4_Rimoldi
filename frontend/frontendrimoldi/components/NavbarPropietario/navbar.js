@@ -11,6 +11,7 @@ export default function Navbar() {
   const [showModal, setShowModal] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const navRef = useRef(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -28,6 +29,9 @@ export default function Navbar() {
     setMenuOpen(false);
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (navRef.current && !navRef.current.contains(event.target)) {
@@ -51,27 +55,28 @@ export default function Navbar() {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        <Image src="/assets/img/rimoldi-logo.png" alt="Logo" width={100} height={40} />
+        <Link href="/propietario/home">
+        <Image src="/assets/img/rimoldi-logo.png" alt="Logo" width={142} height={45} />
+        </Link>
       </div>
-      <nav ref={navRef} className={`${styles.nav} ${menuOpen ? styles.open : ""}`}>
-        <button
-          className={styles.hamburgerButton}
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          ☰
-        </button>
-        <div className={styles.navItems}>
-          <Link href="/propietario/verEstadoContrato" className={styles.navItem}>Ver estado contrato</Link>
+      <button
+        className={styles.hamburger}
+        onClick={toggleMenu}
+        aria-label="Toggle menu"
+      >
+        ☰
+      </button>
+        <nav className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ""}`}>
+          <Link href="/propietario/verEstadoContrato" className={styles.navItem}>Ver estado de contrato</Link>
           <button
             onClick={() => {
               setShowModal(true);
               closeMenu();
             }}
-            className={styles.logoutButton}
+            className={`${styles.navItem} ${styles.logoutButton}`}
           >
             Cerrar Sesión
           </button>
-        </div>
         {showModal && (
           <div className={styles.modalOverlay}>
             <div className={styles.modalContent}>
@@ -98,4 +103,3 @@ export default function Navbar() {
     </header>
   );
 }
-

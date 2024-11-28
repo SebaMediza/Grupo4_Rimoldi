@@ -1,36 +1,54 @@
 /* Contenedor principal */
 .contenedorContrato {
-    margin-top: 3%;
-    margin-bottom: 3%;
-    margin: 20px;
-    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    width: 90%;
+    max-width: 900px;
+    margin: 6rem auto 0.5rem;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 0;
+    /* Asegura que el contenedor ocupe toda la pantalla y está centrado */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Titulo */
 .tituloContrato {
     text-align: center;
-    font-size: 2rem;
     margin-bottom: 20px;
+    font-size: 2rem;
+    color: #333;
+    font-weight: bold;
 }
 
 /* Contenedor del input y el botón */
 .inputContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 3%;
-    justify-self: center;
-    align-self: center;
+    gap: 10px;
 }
 
 /* Estilos del input */
 .inputContrato {
-    padding: 8px;
-    font-size: 15px;
-    border: 1px solid #ddd;
-    border-radius: 2px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
     box-sizing: border-box;
-    transition: border-color 0.3s;
-    background-color: #f1f1f1;
+    background-color: #f8f8f8;
+    width: 70%;
+    max-width: 400px;
+    transition: all 0.3s ease-in-out;
+    color: black;
 }
 
+/* Foco en el input */
 .inputContrato:focus {
     border-color: #852020;
     outline: none;
@@ -39,16 +57,18 @@
 
 /* Estilo del botón */
 .botonBuscar {
-    padding: 10px 14px;
-    margin-left: 10px;
+    padding: 10px 15px;
     background-color: #b11a1a;
-    font-size: 14px;
-    color: #FFF;
+    font-size: 16px;
+    color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
 }
 
+/* Hover sobre el botón */
 .botonBuscar:hover {
     background-color: #961a1a;
 }
@@ -56,36 +76,83 @@
 /* Mensaje de error */
 .errorMessage {
     color: red;
-    margin-top: 10px;
+    text-align: center;
+    margin-top: 15px;
 }
 
 /* Tabla */
 .tableContrato {
     border-collapse: collapse;
-    width: 50%;
+    width: 100%;
+    margin-top: 20px;
     border: 1px solid #ddd;
-    justify-self: center;
-    align-self: center;
-    box-shadow: 0 0 10px #bbbaba;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Encabezados de la tabla */
 .tableContrato th {
     background-color: #64706c;
+    color: white;
+    padding: 12px 10px;
     text-align: left;
-    color: #ffffff;
-    padding: 10px;
-    border: 1px solid #64706c;
-    
 }
 
 /* Celdas de la tabla */
 .tableContrato td {
-    padding: 10px;
+    padding: 12px 10px;
     border: 1px solid #ddd;
+    text-align: left;
 }
 
 /* Celda de la tabla con formato especial */
 .tableContrato td:nth-child(2) {
     font-weight: normal;
+}
+
+/* Media Queries para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+    .contenedorContrato {
+        width: 90%;
+        padding: 15px;
+    }
+
+    /* Cambiar el diseño del formulario a una columna en móviles */
+    .inputContainer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .inputContrato {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .botonBuscar {
+        width: 100%;
+    }
+
+    .tableContrato {
+        width: 100%;
+    }
+
+    .tituloContrato {
+        font-size: 1.6rem; /* Ajuste del tamaño de la fuente */
+    }
+}
+
+/* Media Queries para pantallas muy pequeñas (móviles en orientación vertical) */
+@media (max-width: 480px) {
+    .tituloContrato {
+        font-size: 1.4rem; /* Ajuste para pantallas más pequeñas */
+    }
+
+    .inputContrato {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .botonBuscar {
+        font-size: 14px;
+        padding: 12px;
+    }
 }

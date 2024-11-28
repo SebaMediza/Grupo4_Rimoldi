@@ -5,19 +5,14 @@ import Link from 'next/link';
 import Navbar from "/components/NavbarPropietario/navbar";
 import Footer from "/components/Footer/footer";
 import styles from "./home.module.css";
-
+import Section2 from "./section2";
 const Home = () => {
 
 
   return (
-    <div><Navbar />
-
-      <div className={styles.container}>
-        <h1>Bienvenido a la página principal</h1>
-        <div className={styles.container}>
-          
-        </div>
-      </div>
+    <div>
+      <Navbar />
+      <Section2 />
       <Footer />
     </div>
   );

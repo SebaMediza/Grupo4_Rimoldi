@@ -12,7 +12,9 @@ import java.util.List;
 public abstract class CrudDAO<T> {
 
     public abstract Class<T> getTClass();
+
     public abstract String getTablePK();
+
     public abstract String getTableName();
 
     /**
@@ -67,6 +69,25 @@ public abstract class CrudDAO<T> {
         }
     }
 
+    public int getUltimoId() {
+        try (Connection conn = SqL2ODAO.getCon().open()) {
+            
+            String query = "SELECT " + getTablePK() + " FROM " + getTableName() + " ORDER BY " + getTablePK() + " DESC LIMIT 1";
+            
+            Integer ultimoId = conn.createQuery(query).executeScalar(Integer.class);
+
+            if (ultimoId != null) {
+                return ultimoId;
+            } else {
+                return -1;  
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;  
+        }
+    }
+
     /**
      * Actualiza una entidad en la base de datos según el campo identificador.
      * 
@@ -77,27 +98,30 @@ public abstract class CrudDAO<T> {
      */
     public void update(String idField, Object idValue, T t) throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
-        /*  Class<?> cls = t.getClass();
-        Field[] fields = cls.getDeclaredFields();
-        StringBuilder setSQL = new StringBuilder();
-
-        for (Field field : fields) {
-            String name = field.getName();
-            setSQL.append(name).append(" = :").append(name).append(",");
-        }
-
-        // Quitar la última coma
-        setSQL.setLength(setSQL.length() - 1);
-
-        String updateSQL = "UPDATE " + getTableName() + " SET " + setSQL + " WHERE " + idField + " = :idValue";
-
-        try (Connection con = SqL2ODAO.getCon().open()) {
-            con.createQuery(updateSQL)
-                    .addParameter("idValue", idValue)
-                    .bind(t)
-                    .executeUpdate();
-            System.out.println("Entidad actualizada con " + idField + " = " + idValue);
-        } */
+        /*
+         * Class<?> cls = t.getClass();
+         * Field[] fields = cls.getDeclaredFields();
+         * StringBuilder setSQL = new StringBuilder();
+         * 
+         * for (Field field : fields) {
+         * String name = field.getName();
+         * setSQL.append(name).append(" = :").append(name).append(",");
+         * }
+         * 
+         * // Quitar la última coma
+         * setSQL.setLength(setSQL.length() - 1);
+         * 
+         * String updateSQL = "UPDATE " + getTableName() + " SET " + setSQL + " WHERE "
+         * + idField + " = :idValue";
+         * 
+         * try (Connection con = SqL2ODAO.getCon().open()) {
+         * con.createQuery(updateSQL)
+         * .addParameter("idValue", idValue)
+         * .bind(t)
+         * .executeUpdate();
+         * System.out.println("Entidad actualizada con " + idField + " = " + idValue);
+         * }
+         */
     }
 
     /**
@@ -109,13 +133,16 @@ public abstract class CrudDAO<T> {
      */
     public void delete(String idField, Object idValue) throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
-        /* String deleteSQL = "DELETE FROM " + getTableName() + " WHERE " + idField + " = :idValue";
-
-        try (Connection con = SqL2ODAO.getCon().open()) {
-            con.createQuery(deleteSQL)
-                    .addParameter("idValue", idValue)
-                    .executeUpdate();
-            System.out.println("Entidad eliminada con " + idField + " = " + idValue);
-        } */
+        /*
+         * String deleteSQL = "DELETE FROM " + getTableName() + " WHERE " + idField +
+         * " = :idValue";
+         * 
+         * try (Connection con = SqL2ODAO.getCon().open()) {
+         * con.createQuery(deleteSQL)
+         * .addParameter("idValue", idValue)
+         * .executeUpdate();
+         * System.out.println("Entidad eliminada con " + idField + " = " + idValue);
+         * }
+         */
     }
 }

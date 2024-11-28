@@ -1,6 +1,7 @@
 .container {
     padding: 2rem;
     background-color: white;
+    font-family: 'Helvetica Neue', sans-serif;
 }
 .container h1 {
     text-align: center;
