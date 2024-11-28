@@ -1,10 +1,13 @@
 package com.rimoldi.models.persona;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-@EqualsAndHashCode(callSuper = true)
 
 @Data
-public class Propietario extends Persona {
-    private int cbu;
+public class Propietario{
+    private String email;
+    private String password;
+    private String token;
+    private String nombre;
+   
+    public Propietario(){}
 }

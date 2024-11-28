@@ -1,0 +1,105 @@
+/* Estilo del header */
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    /* Fondo oscuro */
+    padding: 1rem 2rem;
+    /* Espaciado superior e inferior */
+    font-size: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Sombra sutil */
+    position: fixed;
+    /* Fija la barra de navegación en la parte superior */
+    z-index: 999;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: auto;
+    height: 40px;
+    /* Ajusta según el tamaño del logo */
+}
+
+/* Menú de navegación */
+.nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2rem;
+    /* Espaciado entre los elementos del menú */
+}
+
+/* Estilo de los enlaces y botones */
+.navItem {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    color: #000000;
+    text-decoration: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.navItem:hover {
+    background-color: #941b1b;
+    /* Rojo oscuro */
+    color: white;
+}
+
+.navItem:active {
+    background-color: #5e1212;
+    /* Rojo más oscuro al hacer clic */
+}
+
+/* Estilo del botón de login */
+.loginButton {
+    background-color: #941b1b;
+    
+    color: white;
+    font-size: 1rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.loginButton:hover {
+    background-color: #5e1212 ;
+}
+
+.loginButton:active {
+    background-color: #c10000;
+
+}
+
+/* Responsividad: Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav {
+        width: 100%;
+        justify-content: space-around;
+        margin-top: 1rem;
+    }
+
+    .logo {
+        margin-bottom: 1rem;
+    }
+
+    .navItem {
+        width: 100%;
+        /* Hace que los elementos ocupen todo el ancho */
+        text-align: center;
+    }
+}

@@ -1,0 +1,133 @@
+/* General Container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    /* Ancho completo */
+    height: 100vh;
+    /* Alto completo */
+    background: linear-gradient(to bottom right, #f0f4f8, #d9e2ec);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Wrapper (Pantalla dividida) */
+.wrapper {
+    display: flex;
+    width: 100%;
+    /* Ocupa todo el ancho */
+    height: 100%;
+    /* Ocupa todo el alto */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Sección izquierda - Ilustración */
+.illustration {
+    flex: 1;
+    /* Ocupa el 50% */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.illustration img {
+    width: 70%;
+    /* Ajusta el tamaño de la imagen */
+    height: auto;
+    object-fit: contain;
+}
+
+/* Sección derecha - Login Card */
+.loginCard {
+    flex: 1;
+    /* Ocupa el 50% */
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #941b1b
+}
+
+/* Título del formulario */
+.title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+/* Formulario */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 400px;
+    /* Limita el tamaño máximo */
+}
+
+/* Campos de entrada */
+.input {
+    background-color: white;
+    padding: 15px;
+    color: #000000;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+}
+
+.button {
+    background-color: #ffffff;
+    color: #941b1b;
+    font-size: 1rem;
+    font-weight: bolder;
+    padding: 0.8rem 1.2rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.button i {
+    margin-left: 0.1rem;
+    color: #941b1b;
+}
+
+.button:hover {
+    background-color: #c9c9c9;
+}
+
+/* Mensaje de error */
+.errorMessage {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+        /* Se apilan las secciones */
+    }
+
+    .illustration {
+        height: 50%;
+        /* Mitad de la pantalla */
+    }
+
+    .loginCard {
+        height: 50%;
+        /* Mitad de la pantalla */
+    }
+
+    .illustration img {
+        width: 50%;
+        /* Ajusta el tamaño de la imagen */
+    }
+}

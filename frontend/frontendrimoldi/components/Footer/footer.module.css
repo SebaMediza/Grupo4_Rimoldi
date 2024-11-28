@@ -1,0 +1,76 @@
+/* General del footer */
+.footer {
+    background-color: rgb(189, 189, 189) !important;
+    color: rgb(80, 80, 80) !important;
+    padding: 30px 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Contenedor principal */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Sección izquierda */
+.left {
+    text-align: left;
+}
+
+.logo {
+    width: 120px;
+    margin-bottom: 10px;
+}
+
+.left p {
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Sección derecha */
+.right {
+    text-align: right;
+    max-width: 300px;
+}
+
+.right h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.right p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* Redes sociales */
+.socialIcons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.socialIcons img {
+    width: 30px; /* Tamaño uniforme */
+    height: 30px; /* Tamaño uniforme */
+    transition: transform 0.3s ease;
+}
+
+.socialIcons img:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+/* Derechos reservados */
+.footerBottom {
+    margin-top: 20px;
+    text-align: center;
+    color: #3c3c3c; /* Texto gris claro */
+    font-size: 12px;
+    border-top: 1px solid #444; /* Línea separadora */
+    padding-top: 10px;
+}

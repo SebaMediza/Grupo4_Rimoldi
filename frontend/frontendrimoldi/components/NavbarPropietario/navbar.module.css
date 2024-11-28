@@ -1,0 +1,181 @@
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    /* Fondo oscuro */
+    padding: 1rem 2rem;
+    /* Espaciado superior e inferior */
+    font-size: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Sombra sutil */
+    position: fixed;
+    /* Fija la barra de navegación en la parte superior */
+    z-index: 999;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: auto;
+    height: 40px;
+}
+
+.nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2rem;
+    flex: 1;
+    position: relative;
+}
+
+.logoutButton {
+    color: white;
+    background-color: #941b1b;
+    font-size: 1rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.logoutButton:hover {
+    background-color: #5e1212;
+}
+
+.navItems {
+    font-family: 'Helvetica Neue', sans-serif;
+    display: flex;
+    flex-direction: row;
+    /* Asegura que los elementos estén en una fila */
+    position: absolute;
+    /* Asegura que el menú esté dentro del header */
+    top: 0;
+    right: 0;
+    height: 100%;
+    background-color: #ffffff;
+    transition: transform 0.6s ease;
+    /* Ajusta la duración de la transición */
+    transform: translateX(110%);
+    /* Posición inicial fuera de la pantalla */
+    max-width: calc(100% - 120px);
+    /* Asegúrate de no tapar el logo */
+}
+
+.navItem {
+    font-weight: 500;
+    color: #000000;
+    text-decoration: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.navItems a,
+.navItems button {
+    margin-right: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.navItems a:hover,
+.navItems button:hover {
+    background-color: #941b1b;
+    /* Rojo oscuro */
+    color: white;
+}
+
+.nav.open .navItems {
+    transform: translateX(0);
+    /* Posición cuando el menú está abierto */
+}
+
+.hamburgerButton {
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #343a40;
+}
+
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Asegúrate de que el modal se superpone a todos los demás elementos */
+}
+
+.modalContent {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modalButtons {
+    margin-top: 20px;
+}
+
+.cancelButton {
+    margin-right: 10px;
+    padding: 10px 20px;
+    background-color: gray;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.confirmButton {
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.confirmButton:hover {
+    background-color: #c82333;
+}
+
+.menuOpen .mainContent {
+    filter: blur(5px);
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav {
+        width: 100%;
+        justify-content: space-around;
+        margin-top: 1rem;
+    }
+
+    .logo {
+        margin-bottom: 1rem;
+    }
+
+    .navItem {
+        width: 100%;
+        text-align: center;
+    }
+}

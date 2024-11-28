@@ -1,23 +1,25 @@
 package com.rimoldi.services;
 
-import com.rimoldi.interfaces.iPropiedad;
 import com.rimoldi.models.propiedad.Propiedad;
 
-public class PropiedadDAO implements iPropiedad {
-    public Propiedad getPropiedad() {
-        return null;
+public class PropiedadDAO extends CrudDAO<Propiedad> {
+
+    private String tableName = "propiedad";
+    private String tablePK = "idPropiedad";
+
+    @Override
+    public Class<Propiedad> getTClass() {
+        return Propiedad.class;
     }
 
-    public boolean postPropiedad() {
-        return false;
+    @Override
+    public String getTablePK() {
+       return tablePK;
     }
 
-    public boolean putPropiedad() {
-        return false;
-    }
-
-    public boolean deletePropiedad() {
-        return false;
+    @Override
+    public String getTableName() {
+        return tableName;
     }
     
 }

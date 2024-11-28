@@ -1,9 +1,6 @@
 package com.rimoldi.models.contrato;
 
 import java.util.Date;
-import java.util.List;
-
-import com.rimoldi.models.persona.Garante;
 
 import lombok.Data;
 
@@ -17,6 +14,8 @@ public class Contrato {
     private int idPropiedad;
     private int idMartillero;
     private int idGarante;
+
+    public Contrato(){};
 
     public Contrato(int id, Date fechaInicio, Date fechaFin, Date fechaCancelacion, int idInquilino, int idPropiedad, int idMartillero, int idGarante) {
         this.id = id;
