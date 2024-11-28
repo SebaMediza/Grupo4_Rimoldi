@@ -17,10 +17,6 @@ public class EstadoContratoController {
     private final String RES_STRING = "application/json";
     
     public final Route getEstadoContrato = (req, res) -> {
-        /* String tokenPropietario = req.headers("Authorization").split(" ")[1];
-        if (!tokenPropietario.equals("token123456")) {
-            return handleError(res, "Token Invalido", 401);
-        } */
         EstadoContratoDAO estadoContratoDAO = new EstadoContratoDAO();
         Gson gson = new Gson();
         int nroContrato = Integer.parseInt(req.params(":nro_contrato"));

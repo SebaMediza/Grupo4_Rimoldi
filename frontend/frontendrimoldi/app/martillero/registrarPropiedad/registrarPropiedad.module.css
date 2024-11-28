@@ -1,0 +1,181 @@
+/* Contenedor principal */
+.container {
+    background-color: #ffffff;
+    width: 90%;
+    /* Ocupará casi todo el ancho */
+    max-width: 1200px;
+    /* Limita el tamaño en pantallas grandes */
+    margin: 6rem auto 0.5rem;
+    /* Espacio para el header (6rem) y separación inferior */
+    padding: 30px;
+    box-shadow: 0 0 10px #bbbaba;
+    border-radius: 8px;
+    z-index: 0;
+    /* No interfiere con el header */
+}
+
+/* Título */
+.h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #333;
+}
+
+/* Formulario */
+.form {
+    display: grid;
+    gap: 15px;
+
+    margin-top: 20px;
+    grid-template-columns: 1fr 1fr;
+    /* Dos columnas */
+    grid-auto-rows: auto;
+    /* Asegura que las filas se adapten al contenido */
+
+}
+
+/* Inputs y selects */
+.input,
+.select,
+.inputArchivo {
+    color: black;
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+    transition: border-color 0.3s;
+}
+
+/* Foco en inputs */
+.input:focus,
+.select:focus {
+    border-color: #852020;
+    outline: none;
+    box-shadow: 0 0 5px rgba(177, 16, 16, 0.5);
+}
+
+/* Botón */
+.button {
+    width: 50%;
+    /* Ajusta el ancho según prefieras */
+    padding: 12px;
+    background-color: #b11a1a;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 15px;
+    justify-self: center;
+    /* Centra horizontalmente */
+    align-self: center;
+    /* Centra verticalmente */
+    grid-column: span 2;
+    /* Ocupa ambas columnas del formulario */
+}
+
+.button:hover {
+    background-color: #961a1a;
+}
+
+/* Checkbox y etiquetas */
+.checkboxLabel {
+    background-color: white;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.labelArchivo,
+.labelSelect {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Opcional: estilo adicional para centrar y espaciar mejor el campo de archivo */
+.labelArchivo {
+    display: block;
+    width: 49.4%;
+    text-align: left;
+    margin-top: 10px;
+    grid-column: span 2;
+    /* En un grid de dos columnas, esto ocupa ambas */
+}
+
+.labelSelect {
+    display: block;
+    width: 49.4%;
+    text-align: left;
+    margin-top: 10px;
+    grid-column: span 2;
+    /* En un grid de dos columnas, esto ocupa ambas */
+}
+
+/* Responsivo: Móviles */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        margin-top: 5rem;
+        /* Espacio ajustado según header */
+        padding: 20px;
+    }
+
+    .labelArchivo {
+        width: 100%;
+        text-align: left;
+        margin-top: 10px;
+        grid-column: span 2;
+        /* En un grid de dos columnas, esto ocupa ambas */
+    }
+
+    .h1 {
+        font-size: 1.8rem;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        /* Asegura que los elementos estén en una sola columna */
+        gap: 10px;
+        /* Espaciado uniforme entre los elementos */
+    }
+
+    .input,
+    .select,
+    .inputArchivo {
+        font-size: 14px;
+        /* Ajuste del tamaño de fuente */
+        width: 100%;
+        /* Asegura ancho completo en móviles */
+    }
+
+    .button {
+        font-size: 14px;
+    }
+
+
+}
+
+/* Pantallas grandes */
+@media (min-width: 1024px) {
+    .container {
+        width: 75%;
+        /* Más reducido en pantallas grandes */
+        margin-top: 6rem;
+        /* Espacio consistente */
+    }
+
+    .form {
+        grid-template-columns: 1fr 1fr;
+        /* Dos columnas */
+    }
+
+    .button {
+        width: 50%;
+        /* Botón más pequeño */
+        margin: auto;
+    }
+}

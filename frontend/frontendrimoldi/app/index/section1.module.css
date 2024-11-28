@@ -1,37 +1,44 @@
+
 /* Estilos generales del contenedor */
 .main {
     flex: 1;
     text-align: center;
     color: rgb(0, 0, 0);
     background-color: white;
+    font-family: 'Helvetica Neue', sans-serif;
 }
 
-/* Contenedor de la imagen */
 .imageContainer {
     position: relative;
-    width: 100%; /* Ocupa todo el ancho disponible */
+    width: 100%;
+    /* Ocupa todo el ancho disponible */
     height: 0;
-    padding-top: 56.25%; /* Relación de aspecto 16:9 (puedes ajustarlo si lo prefieres) */
-    overflow: hidden; /* Evita el desbordamiento de la imagen */
+    padding-top: 56.25%;
+    /* Relación de aspecto 16:9 */
+    overflow: hidden;
+    /* Evita el desbordamiento de la imagen */
     display: flex;
-    justify-content: center; /* Centra la imagen horizontalmente */
-    align-items: center; /* Centra la imagen verticalmente */
-    margin-bottom: 2rem;
+    justify-content: center;
+    /* Centra la imagen horizontalmente */
+    align-items: center;
+    /* Centra la imagen verticalmente */
 }
 
 /* Imagen ajustada */
 .imageContainer img {
-    object-fit: cover; /* Recorta la imagen sin estirarla */
-    position: absolute; /* Para que la imagen se ajuste y recorte dentro del contenedor */
+    object-fit: cover;
+    /* Recorta la imagen sin estirarla */
+    position: absolute;
+    /* Para que la imagen se ajuste y recorte dentro del contenedor */
     top: 0;
     left: 50%;
-    transform: translateX(-50%); /* Centra la imagen horizontalmente */
-    width: 100%; /* Ocupa todo el ancho del contenedor */
-    height: 100%; /* Se ajusta a la altura del contenedor */
+    transform: translateX(-50%);
+    /* Centra la imagen horizontalmente */
+    width: 100%;
+    /* Ocupa todo el ancho del contenedor */
+    height: 100%;
+    /* Se ajusta a la altura del contenedor */
 }
-
-
-
 /* Texto de subtítulo para la imagen */
 .caption {
     margin-top: 0.5rem;
@@ -44,25 +51,27 @@
     display: flex;
     justify-content: space-around;
     gap: 1rem;
-    margin-top: 2rem;
-    background-color: #435951;
+    background-color: #ffffff;
     padding: 1.5rem;
-    
-}
+    padding-top: 0;
 
-/* Caja individual de información */
+}
 .infoBox {
     width: 30%;
     background-color: #ffffff;
     padding: 1rem;
+    border: 1px solid #000000;
+    /* Borde negro */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    /* Transición suave para el hover */
 }
 
 /* Estilos del título de infoBox */
 .infoBox h3 {
     font-size: 1.2rem;
-    color: #000000; /* Ajuste de color para contraste */
+    color: #000000;
     margin-bottom: 0.5rem;
 }
 
@@ -70,4 +79,111 @@
 .infoBox p {
     font-size: 1rem;
     color: #5a5a5a;
+}
+
+/* Efecto hover */
+.infoBox:hover {
+    background-color: #941b1b;
+    /* Fondo rojo */
+    border: 1px solid #000000;
+    /* Borde negro */
+}
+
+/* Cambiar el color del texto a blanco cuando se hace hover */
+.infoBox:hover h3,
+.infoBox:hover p {
+    color: white;
+    /* Texto blanco */
+}
+
+/* Si los íconos están presentes dentro de los box, cambiamos su color también */
+.infoBox:hover i {
+    color: white;
+    /* Íconos blancos */
+}
+
+/* Iconos dentro de infoBox */
+.infoBox i {
+    font-size: 2rem;
+    /* Tamaño del icono */
+    color: #941b1b;
+    /* Color rojo oscuro */
+    margin-bottom: 0.5rem;
+    /* Espaciado debajo del icono */
+    display: block;
+    /* Asegura que el icono ocupe toda una línea */
+    text-align: center;
+    /* Centra el icono horizontalmente */
+}
+
+.redBanner {
+    background-color: #941b1b;
+    /* Color rojo */
+    color: white;
+    /* Letras blancas */
+    padding-top: 1.5rem;
+    padding-bottom:1rem ;
+    text-align: center;
+    /* Centra el texto */
+    font-size: 1.5rem;
+    /* Tamaño de fuente */
+
+}
+
+/* Estilos del texto de infoBox */
+.infoBox p {
+    font-size: 1rem;
+    color: #5a5a5a;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+
+    /* Ajustes para pantallas medianas */
+    .redBanner {
+        font-size: 1.2rem;
+        padding: 0.8rem;
+    }
+
+    .infoSection {
+        flex-wrap: wrap;
+        /* Permite que los elementos se ajusten en filas */
+        justify-content: center;
+    }
+
+    .infoBox {
+        flex: 1 1 calc(50% - 1rem);
+        /* Dos cajas por fila */
+        max-width: 48%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* Ajustes para pantallas pequeñas */
+    .caption {
+        font-size: 0.9rem;
+        /* Texto más pequeño para subtítulos */
+    }
+
+    .redBanner {
+        font-size: 1rem;
+        /* Texto más pequeño para la franja roja */
+    }
+
+    .infoBox {
+        flex: 1 1 100%;
+        /* Una caja por fila */
+        max-width: 100%;
+    }
+
+    .infoBox h3 {
+        font-size: 1rem;
+        /* Ajustar el tamaño del título */
+    }
+
+    .infoBox p {
+        font-size: 0.9rem;
+        /* Reducir el tamaño del texto */
+    }
 }

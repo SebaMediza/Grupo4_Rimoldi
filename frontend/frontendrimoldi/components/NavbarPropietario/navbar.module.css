@@ -1,0 +1,158 @@
+.header {
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    z-index: 999;
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+/* Botón del menú hamburguesa */
+.hamburger {
+    display: none;
+    background: none;
+    color: #941b1b;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Menú de navegación */
+.nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2rem;
+    transition: transform 0.3s ease;
+}
+
+/* Ocultar menú en móvil por defecto */
+.navOpen {
+    transform: translateY(0);
+}
+
+.navItem {
+    font-weight: 500;
+    color: #000000;
+    text-decoration: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.navItem:hover {
+    background-color: #941b1b;
+    color: white;
+}
+
+
+.logoutButton {
+    background-color: #941b1b;
+    color: white;
+    font-size: 1rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.logoutButton:hover {
+    background-color: #5e1212;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Asegúrate de que el modal se superpone a todos los demás elementos */
+}
+
+.modalContent {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modalButtons {
+    margin-top: 20px;
+}
+
+.cancelButton {
+    margin-right: 10px;
+    padding: 10px 20px;
+    background-color: gray;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.confirmButton {
+    padding: 10px 20px;
+    background-color: #941b1b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.confirmButton:hover {
+    background-color: #c82333;
+}
+
+.menuOpen .mainContent {
+    filter: blur(5px);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        gap: 0;
+        background-color: white;
+        transform: translateY(-200%);
+        z-index: 998;
+        padding: 1rem 0;
+    }
+
+    .navOpen {
+        transform: translateY(0);
+    }
+
+    .navItem {
+        width: 100%;
+        padding: 1rem;
+        text-align: center;
+    }
+}

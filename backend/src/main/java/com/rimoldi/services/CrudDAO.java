@@ -1,7 +1,6 @@
 package com.rimoldi.services;
 
 import org.sql2o.Connection;
-import com.rimoldi.interfaces.iCrudDAO;
 import java.lang.reflect.Field;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public abstract class CrudDAO<T> implements iCrudDAO<T> {
         columnsInsertSQL.append(")");
         valuesInsertSQL.append(")");
 
-        String insertSQL = "INSERT INTO " + getTableName() + " " + columnsInsertSQL + " VALUES " + valuesInsertSQL;
+        String insertSQL = "INSERT INTO " + getTableName() + " " + columnsInsertSQL + " VALUEs " + valuesInsertSQL;
 
         try (Connection con = SqL2ODAO.getCon().open()) {
             con.createQuery(insertSQL).bind(t).executeUpdate();
@@ -55,6 +54,24 @@ public abstract class CrudDAO<T> implements iCrudDAO<T> {
         }
     }
 
+    public int getUltimoId() {
+        try (Connection conn = SqL2ODAO.getCon().open()) {
+            
+            String query = "SELECT " + getTablePK() + " FROM " + getTableName() + " ORDER BY " + getTablePK() + " DESC LIMIT 1";
+            
+            Integer ultimoId = conn.createQuery(query).executeScalar(Integer.class);
+
+            if (ultimoId != null) {
+                return ultimoId;
+            } else {
+                return -1;  
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;  
+        }
+    }
     /**
      * Actualiza una entidad en la base de datos según el campo identificador.
      * 

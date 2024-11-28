@@ -6,6 +6,6 @@ public class Martillero {
     private String email;
     private String password;
     private String token;
-   
+    private String nombre;
     public Martillero(){}
 }

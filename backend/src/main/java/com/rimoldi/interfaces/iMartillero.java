@@ -4,5 +4,5 @@ import com.rimoldi.models.persona.Martillero;
 
 public interface iMartillero {
 
-    public Martillero getMartillero(String email, String contraseña);
+    public Martillero getMartillero(String email, String password);
 }

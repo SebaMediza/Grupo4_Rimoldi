@@ -1,0 +1,237 @@
+/* Estilo general del contenedor principal */
+.container {
+    background-color: #ffffff;
+    width: 45%;
+    /* Ocupará casi todo el ancho */
+    max-width: 1200px;
+    /* Limita el tamaño en pantallas grandes */
+    margin: 6rem auto 0.5rem;
+    /* Espacio para el header (6rem) y separación inferior */
+    padding: 30px;
+    box-shadow: 0 0 10px #bbbaba;
+    border-radius: 8px;
+    z-index: 0;
+    /* No interfiere con el header */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilo para el título principal */
+.h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #333333;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Estilo general para el formulario */
+.form {
+    gap: 15px;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+
+}
+
+/* Etiquetas de los campos */
+.label {
+    font-size: 16px;
+    display: block;
+    font-weight: bold;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 12px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    margin-top: 10%;
+}
+
+/* Campos de entrada */
+.input {
+    color: black;
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+    transition: border-color 0.3s;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    /* Asegura que las columnas se acomoden bien en pantallas pequeñas */
+}
+
+.column {
+    flex: 1;
+    min-width: 200px;
+    /* Asegura que las columnas no se hagan demasiado pequeñas */
+}
+
+.input:focus {
+    border-color: #852020;
+    outline: none;
+    box-shadow: 0 0 5px rgba(177, 16, 16, 0.5);
+}
+
+/* Botón */
+.button {
+    width: 100%;
+    /* Ajusta el ancho según prefieras */
+    padding: 12px;
+    background-color: #b11a1a;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 15px;
+    justify-self: center;
+    /* Centra horizontalmente */
+    align-self: center;
+    /* Centra verticalmente */
+    grid-column: span 2;
+    /* Ocupa ambas columnas del formulario */
+}
+
+.button:hover {
+    background-color: #b11a1a;
+}
+
+/* Mensaje de error */
+.errorMessage {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Estilos para los detalles del contrato */
+.containerDetalles {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    margin-top: 30px;
+    border-radius: 8px;
+
+}
+
+.containerDetalles h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Contenedor para las tarjetas */
+.detallesTarjetas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos tarjetas por fila */
+    gap: 20px;
+    justify-items: center;
+    margin-top: 20px;
+}
+
+/* Tarjeta individual */
+.tarjeta {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: 100%;
+    max-width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta:hover {
+    transform: translateY(-10px); /* Desplazamiento hacia arriba al pasar el mouse */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Títulos de las tarjetas */
+.tarjeta h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Contenido de las tarjetas */
+.tarjeta p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+/* Diseño responsivo para pantallas pequeñas */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+
+    }
+
+    .form {
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    .row {
+        flex-direction: column;
+        /* Los campos de fechas estarán en una columna en pantallas pequeñas */
+    }
+
+    .column {
+        width: 100%;
+        /* Los inputs de fecha ocuparán todo el ancho en pantallas pequeñas */
+        margin-bottom: 10px;
+    }
+
+    .input {
+        padding: 8px;
+    }
+
+    .detallesTarjetas {
+        grid-template-columns: 1fr; /* Una tarjeta por fila en pantallas más pequeñas */
+    }
+
+    .containerDetalles h2 {
+        font-size: 20px;
+    }
+
+    .tarjeta h3 {
+        font-size: 16px;
+    }
+
+    .tarjeta p {
+        font-size: 13px;
+    }
+}
+
+/* Media Queries para pantallas extra pequeñas (móviles en orientación vertical) */
+@media (max-width: 480px) {
+    .button {
+        font-size: 14px;
+        /* Ajusta el tamaño del botón */
+    }
+
+    .input {
+        font-size: 14px;
+        /* Ajusta el tamaño de los inputs */
+    }
+}

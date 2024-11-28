@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS `rimoldi`.`Persona` (
   `username` VARCHAR(45) NOT NULL,
   `cuil` BIGINT NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  UNIQUE INDEX `dni_UNIQUE` (`dni` ASC) VISIBLE)
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  UNIQUE INDEX `dni_UNIQUE` (`dni` ASC) )
 ENGINE = InnoDB;
 
 
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `rimoldi`.`Garante` (
   `contacto_trabaja` VARCHAR(45) NOT NULL,
   `idPersona` INT NOT NULL,
   PRIMARY KEY (`idGarante`, `idPersona`),
-  INDEX `fk_Garante_Persona1_idx` (`idPersona` ASC) VISIBLE,
+  INDEX `fk_Garante_Persona1_idx` (`idPersona` ASC) ,
   CONSTRAINT `fk_Garante_Persona1`
     FOREIGN KEY (`idPersona`)
     REFERENCES `rimoldi`.`Persona` (`id`)
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `rimoldi`.`Propietario` (
   `cbu` BIGINT NOT NULL,
   `idPersona` INT NOT NULL,
   PRIMARY KEY (`idPropietario`, `idPersona`),
-  INDEX `fk_Propietario_Persona1_idx` (`idPersona` ASC) VISIBLE,
+  INDEX `fk_Propietario_Persona1_idx` (`idPersona` ASC) ,
   CONSTRAINT `fk_Propietario_Persona1`
     FOREIGN KEY (`idPersona`)
     REFERENCES `rimoldi`.`Persona` (`id`)
@@ -104,7 +104,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `rimoldi`.`Propiedad` ;
 
 CREATE TABLE IF NOT EXISTS `rimoldi`.`Propiedad` (
-  `idPropiedad` INT NOT NULL,
+  `idPropiedad` INT NOT NULL AUTO_INCREMENT,
   `direccion` VARCHAR(45) NOT NULL,
   `alquiler` DOUBLE NOT NULL,
   `m2_cubiertos` INT NOT NULL,
@@ -115,11 +115,10 @@ CREATE TABLE IF NOT EXISTS `rimoldi`.`Propiedad` (
   `fecha_precio_minimo` DATE NOT NULL,
   `cuidad` VARCHAR(45) NOT NULL,
   `idPropietario` INT NOT NULL,
-    `disponible` TINYINT(1) NOT NULL,
-    `imagen` varchar(100) DEFAULT NULL,
+    `disponible` TINYINT NOT NULL,
   PRIMARY KEY (`idPropiedad`),
-  INDEX `fk_Propiedad_Propietario1_idx` (`idPropietario` ASC) VISIBLE,
-  UNIQUE INDEX `idPropiedad_UNIQUE` (`idPropiedad` ASC) VISIBLE,
+  INDEX `fk_Propiedad_Propietario1_idx` (`idPropietario` ASC) ,
+  UNIQUE INDEX `idPropiedad_UNIQUE` (`idPropiedad` ASC) ,
   CONSTRAINT `fk_Propiedad_Propietario1`
     FOREIGN KEY (`idPropietario`)
     REFERENCES `rimoldi`.`Propietario` (`idPropietario`)
@@ -138,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `rimoldi`.`Martillero` (
   `nro_matricula` INT NOT NULL,
   `idPersona` INT NOT NULL,
   PRIMARY KEY (`idMartillero`, `idPersona`),
-  INDEX `fk_Martillero_Persona1_idx` (`idPersona` ASC) VISIBLE,
+  INDEX `fk_Martillero_Persona1_idx` (`idPersona` ASC) ,
   CONSTRAINT `fk_Martillero_Persona1`
     FOREIGN KEY (`idPersona`)
     REFERENCES `rimoldi`.`Persona` (`id`)
@@ -160,9 +159,9 @@ CREATE TABLE IF NOT EXISTS `rimoldi`.`Contrato` (
   `idPersona` INT NOT NULL,
   `idMartillero` INT NOT NULL,
   PRIMARY KEY (`nro_contrato`),
-  INDEX `fk_Contrato_Propiedad1_idx` (`idPropiedad` ASC) VISIBLE,
-  INDEX `fk_Contrato_Inquilino1_idx` (`idPersona` ASC) VISIBLE,
-  INDEX `fk_Contrato_Martillero1_idx` (`idMartillero` ASC) VISIBLE,
+  INDEX `fk_Contrato_Propiedad1_idx` (`idPropiedad` ASC) ,
+  INDEX `fk_Contrato_Inquilino1_idx` (`idPersona` ASC) ,
+  INDEX `fk_Contrato_Martillero1_idx` (`idMartillero` ASC) ,
   CONSTRAINT `fk_Contrato_Propiedad1`
     FOREIGN KEY (`idPropiedad`)
     REFERENCES `rimoldi`.`Propiedad` (`idPropiedad`)
@@ -187,7 +186,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `rimoldi`.`Familiar` ;
 
 CREATE TABLE IF NOT EXISTS `rimoldi`.`Familiar` (
-  `idFamiliar` INT NOT NULL,
+  `idFamiliar` INT NOT NULL AUTO_INCREMENT,
   `cant_ambientes` INT NOT NULL,
   `cant_baños` INT NOT NULL,
   `cant_autos_cochera` INT NOT NULL,
@@ -210,7 +209,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `rimoldi`.`Comercial` ;
 
 CREATE TABLE IF NOT EXISTS `rimoldi`.`Comercial` (
-  `idComercial` INT NOT NULL,
+  `idComercial` INT NOT NULL AUTO_INCREMENT,
   `permisos_municipales` VARCHAR(45) NOT NULL,
   `baño` TINYINT NOT NULL,
   `cocina` TINYINT NOT NULL,
@@ -235,7 +234,7 @@ CREATE TABLE IF NOT EXISTS `rimoldi`.`Firma` (
   `nro_contrato` INT NOT NULL,
   `idGarante` INT NOT NULL,
   PRIMARY KEY (`nro_contrato`, `idGarante`),
-  INDEX `fk_Contrato_has_Garante_Garante1_idx` (`idGarante` ASC) VISIBLE,
+  INDEX `fk_Contrato_has_Garante_Garante1_idx` (`idGarante` ASC) ,
   CONSTRAINT `fk_Contrato_has_Garante_Contrato1`
     FOREIGN KEY (`nro_contrato`)
     REFERENCES `rimoldi`.`Contrato` (`nro_contrato`)
@@ -258,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `rimoldi`.`Estado` (
   `idEstado` INT NOT NULL,
   `estado` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idEstado`),
-  UNIQUE INDEX `idEstado_UNIQUE` (`idEstado` ASC) VISIBLE)
+  UNIQUE INDEX `idEstado_UNIQUE` (`idEstado` ASC) )
 ENGINE = InnoDB;
 
 
@@ -271,8 +270,8 @@ CREATE TABLE IF NOT EXISTS `rimoldi`.`EstadoContrato` (
   `nro_contrato` INT NOT NULL,
   `idEstado` INT NOT NULL,
   PRIMARY KEY (`nro_contrato`, `idEstado`),
-  INDEX `fk_Contrato_has_Estado_Estado1_idx` (`idEstado` ASC) VISIBLE,
-  INDEX `fk_Contrato_has_Estado_Contrato1_idx` (`nro_contrato` ASC) VISIBLE,
+  INDEX `fk_Contrato_has_Estado_Estado1_idx` (`idEstado` ASC) ,
+  INDEX `fk_Contrato_has_Estado_Contrato1_idx` (`nro_contrato` ASC) ,
   CONSTRAINT `fk_Contrato_has_Estado_Contrato1`
     FOREIGN KEY (`nro_contrato`)
     REFERENCES `rimoldi`.`Contrato` (`nro_contrato`)

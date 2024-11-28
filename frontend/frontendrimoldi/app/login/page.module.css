@@ -1,123 +1,154 @@
-.container{
-    margin-top: 5%;
-}
-.page {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-    border-radius:10px;
-    margin-bottom: 5%;
-}
-.titulo{
-    text-align: center;
-    margin-bottom: 5%;
-    margin-top: 5%;
-}
-
-.form {
+/* General Container */
+.container {
+    font-family: 'Helvetica Neue', sans-serif;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #941b1b;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.input {
-    padding: 10px;
-    margin-top: 5%;
-    border: 1px solid #ddd;
+/* Wrapper (Pantalla dividida) */
+.wrapper {
+    display: flex;
+    width: 90%;
+    max-width: 1200px;
+    height: 90%;
+    background-color: white;
     border-radius: 10px;
-    width: 80%;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.button {
-    margin-top: 10%;
-    margin-bottom: 5%;
-    padding: 10px;
-    background-color: #b11a1a;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 10px;
-    width: 80%;
-}
-.button:hover{
-    background-color: #961a1a;
-}
-.button:disabled {
-    background-color: #ccc;
-}
-
-.errorMessage {
-    color: red;
-    font-size: 12px;
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
-    padding: 10px;
-    margin-top: 10%;
-}
-.footer {
-    background-color: #f0f0f0;
-    color: #333;
-    padding: 40px 20px;
-    text-align: center;
-}
-.logo {
-    width: 100px;
-    height: 100px;
-}
-
-/* Contenido del footer */
-.footerContent {
+/* Sección izquierda - Ilustración */
+.illustration {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+    position: relative;
 }
 
-/* Secciones del footer */
-.footerSection {
+.fullImage {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.imageHiddenMobile {
+    display: block;
+}
+
+.mobileLogo {
+    display: none;
+}
+
+/* Línea divisoria */
+.divider {
+    width: 1px;
+    height: 60%;
+    background-color: #ddd;
+    align-self: center;
+}
+
+/* Sección derecha - Login Card */
+.loginCard {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #000000;
     margin-bottom: 20px;
 }
 
-.footerSection h4 {
-    color: #b11a1a;
-    /* Azul */
-    margin-bottom: 10px;
-    
-}
-
-.footerSection p{
-    color: #333;
-    text-decoration: none;
-    margin-left: 70px;
-    margin-right: 70px;
-}
-
-.footerSection a {
-    color: #333;
-    text-decoration: none;
-}
-
-/* Íconos de redes sociales */
-.socialIcons {
+/* Formulario */
+.form {
     display: flex;
-    justify-content: center;
-    gap: 15px;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 400px;
 }
 
-.socialIcons a {
-    padding: 8px 12px;
-    transition: background-color 0.3s;
+/* Campos de entrada */
+.input {
+    background-color: white;
+    padding: 15px;
+    color: #000000;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
 }
 
-.socialIcons img:hover {
-    background-color: #b11a1a;
-    /* Rojo */
+.button {
+    background-color: #941b1b;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.8rem 1.2rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
 }
 
-.footerBottom {
-    margin-top: 20px;
-    color: #666;
+.button i {
+    margin-left: 0.5rem;
+}
+
+.button:hover {
+    background-color: #c32727;
+}
+
+/* Mensaje de error */
+.errorMessage {
+    color: #e74c3c;
     font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+    .wrapper {
+        margin: 1rem;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .illustration {
+        padding: 10px;
+        height: auto;
+    }
+
+    .fullImage {
+        display: none;
+        /* Ocultamos imagen grande */
+    }
+
+    .mobileLogo {
+        display: block;
+        /* Mostramos el logo pequeño */
+        margin-bottom: 20px;
+    }
+
+    .divider {
+        display: none;
+        /* Ocultamos la línea divisoria en móvil */
+    }
 }

@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import styles from './propiedades.module.css';
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 const Propiedades = () => {
     const [propiedades, setPropiedades] = useState([]);
-    const [loading, setLoading] = useState(true); 
+    const [visibleCount, setVisibleCount] = useState(4); // Mostrar 4 propiedades por vez
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     const fetchPropiedades = async () => {
         try {
@@ -21,6 +26,7 @@ const Propiedades = () => {
             setPropiedades(data);
         } catch (error) {
             console.error("Hubo un problema al obtener las propiedades:", error);
+            setError("Hubo un problema al cargar las propiedades.");
         } finally {
             setLoading(false);
         }
@@ -30,31 +36,50 @@ const Propiedades = () => {
         fetchPropiedades();
     }, []);
 
+
+    const cargarMas = () => {
+        setVisibleCount((prev) => prev + 4); // Mostrar 4 más al cargar
+    };
+
     return (
-        <div>
-            <h1>Lista de Propiedades</h1>
+        <div className={styles.container}>
+            <h1>Propiedades destacadas</h1>
             {loading ? (
                 <p>Cargando propiedades...</p>
+            ) : error ? (
+                <p className={styles.error}>{error}</p>
             ) : (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
-                    {propiedades.length > 0 ? (
-                        propiedades.map((propiedad) => (
-                            <div
-                                key={propiedad.id}
-                                style={{
-                                    border: '1px solid #ccc',
-                                    padding: '1rem',
-                                    width: '300px',
-                                    borderRadius: '8px',
-                                }}
-                            >
-                                <h2>{propiedad.direccion}</h2>
-                                <p><strong>Precio:</strong> {propiedad.alquiler}</p>
-                                <p><strong>Ciudad:</strong> {propiedad.cuidad}</p>
+                <div>
+                    <div className={styles.grid}>
+                        {propiedades.slice(0, visibleCount).map((propiedad, index) => (
+                            <div className={styles.card} key={propiedad.id}>
+                                <div className={styles.imageWrapper}>
+                                    <Image
+                                        src={'/assets/uploads/'+propiedad.imagen} // Asigna imagen cíclicamente
+                                        alt={propiedad.direccion}
+                                        layout="fill"
+                                        objectFit="cover"
+                                        className={styles.image}
+                                    />
+                                    <div className={styles.overlay}>
+                                        <i className="fas fa-map-marker-alt"></i> {propiedad.direccion}
+                                    </div>
+                                </div>
+                                <div className={styles.info}>
+                                    <p>
+                                        <strong>Precio: </strong><i className="bi bi-currency-dollar"></i>{propiedad.alquiler}
+                                    </p>
+                                    <p>
+                                        <strong>Ciudad:</strong><i className="bi bi-geo-alt"></i> {propiedad.cuidad}
+                                    </p>
+                                </div>
                             </div>
-                        ))
-                    ) : (
-                        <p>No se encontraron propiedades.</p>
+                        ))}
+                    </div>
+                    {visibleCount < propiedades.length && (
+                        <button className={styles.button} onClick={cargarMas}>
+                            <i className="bi bi-plus"></i>
+                        </button>
                     )}
                 </div>
             )}
